@@ -5,7 +5,7 @@ import SocialLinks from './SocialLinks.jsx';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const quoteUrl = getWhatsAppUrl('Hola PitDev, quiero cotizar una solución digital para mi negocio.');
+  const quoteUrl = getWhatsAppUrl();
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-pit-black/[0.78] backdrop-blur-xl">
@@ -45,7 +45,7 @@ export default function Navbar() {
           <a
             href={quoteUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-pit-neon bg-pit-neon px-4 py-2 text-sm font-bold text-pit-black shadow-glow transition hover:bg-pit-mint"
           >
             <MessageCircle className="size-4" aria-hidden="true" />
@@ -84,7 +84,7 @@ export default function Navbar() {
               <a
                 href={quoteUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="focus-ring inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-pit-neon bg-pit-neon px-4 py-2 text-sm font-bold text-pit-black shadow-glow transition hover:bg-pit-mint"
               >
                 <MessageCircle className="size-4" aria-hidden="true" />

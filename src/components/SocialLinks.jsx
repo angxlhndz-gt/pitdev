@@ -27,7 +27,7 @@ export default function SocialLinks({ className = '', iconClassName = '' }) {
           key={label}
           href={href}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           aria-label={label}
           title={label}
           className={`focus-ring grid size-10 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-pit-ink transition hover:border-pit-neon/60 hover:bg-pit-neon/10 hover:text-pit-neon ${iconClassName}`}

@@ -6,21 +6,6 @@ import SectionHeader from './SectionHeader.jsx';
 import SocialLinks from './SocialLinks.jsx';
 
 export default function Contact() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    // The form is visual for now; submission prepares a WhatsApp message.
-    const message = [
-      'Hola PitDev, quiero hablar sobre un proyecto.',
-      `Nombre: ${formData.get('name') || ''}`,
-      `Teléfono: ${formData.get('phone') || ''}`,
-      `Tipo de proyecto: ${formData.get('projectType') || ''}`,
-      `Mensaje: ${formData.get('message') || ''}`,
-    ].join('\n');
-
-    window.open(getWhatsAppUrl(message), '_blank', 'noopener,noreferrer');
-  };
-
   return (
     <section id="contacto" className="relative bg-pit-black px-4 py-20 sm:px-6 lg:px-8">
       <div className="absolute inset-0 circuit-grid opacity-35" aria-hidden="true" />
@@ -33,21 +18,21 @@ export default function Contact() {
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-6">
             <h3 className="text-2xl font-bold text-white">Canales directos</h3>
             <p className="mt-4 leading-8 text-pit-ink/[0.72]">
-              Escríbenos para cotizar una página, revisar una idea de sistema o adaptar una demo a tu negocio.
+              Escríbenos para cotizar una página, revisar una idea de sistema o definir una solución para tu negocio.
             </p>
             <div className="mt-7 flex flex-col gap-3">
               <ButtonLink
-                href={getWhatsAppUrl('Hola PitDev, quiero conversar sobre mi proyecto.')}
+                href={getWhatsAppUrl()}
                 icon={MessageCircle}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 Escribir por WhatsApp
               </ButtonLink>
-              <ButtonLink href={site.social.instagram} icon={FaInstagram} variant="secondary" target="_blank" rel="noreferrer">
+              <ButtonLink href={site.social.instagram} icon={FaInstagram} variant="secondary" target="_blank" rel="noopener noreferrer">
                 Ver Instagram
               </ButtonLink>
-              <ButtonLink href={site.social.facebook} icon={FaFacebookF} variant="secondary" target="_blank" rel="noreferrer">
+              <ButtonLink href={site.social.facebook} icon={FaFacebookF} variant="secondary" target="_blank" rel="noopener noreferrer">
                 Ver Facebook
               </ButtonLink>
             </div>
@@ -58,7 +43,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="rounded-lg border border-pit-neon/20 bg-pit-panel/[0.84] p-5 shadow-panel md:p-7">
+          <form className="rounded-lg border border-pit-neon/20 bg-pit-panel/[0.84] p-5 shadow-panel md:p-7">
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-pit-ink">Nombre</span>
@@ -113,16 +98,18 @@ export default function Contact() {
               />
             </label>
 
-            <button
-              type="submit"
+            <a
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
               className="focus-ring mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg border border-pit-neon bg-pit-neon px-5 py-3 text-sm font-bold text-pit-black shadow-glow transition hover:bg-pit-mint sm:w-auto"
             >
               <Send className="size-4" aria-hidden="true" />
               <span>Enviar por WhatsApp</span>
-            </button>
+            </a>
             <p className="mt-4 flex items-center gap-2 text-sm text-pit-ink/[0.55]">
               <ExternalLink className="size-4" aria-hidden="true" />
-              Se abrirá WhatsApp con tu mensaje listo para enviar.
+              Se abrirá WhatsApp en una nueva pestaña.
             </p>
           </form>
         </div>

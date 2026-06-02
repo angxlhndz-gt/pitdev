@@ -4,7 +4,7 @@ import AnimatedNetworkBackground from './AnimatedNetworkBackground.jsx';
 import ButtonLink from './ButtonLink.jsx';
 
 export default function Hero() {
-  const whatsappUrl = getWhatsAppUrl('Hola PitDev, quiero hablar sobre una solución digital para mi negocio.');
+  const whatsappUrl = getWhatsAppUrl();
 
   return (
     <section id="inicio" className="relative flex min-h-screen items-center overflow-hidden pt-24">
@@ -30,7 +30,7 @@ export default function Hero() {
             <ButtonLink href="#servicios" icon={ArrowDown}>
               Ver servicios
             </ButtonLink>
-            <ButtonLink href={whatsappUrl} icon={MessageCircle} variant="secondary" target="_blank" rel="noreferrer">
+            <ButtonLink href={whatsappUrl} icon={MessageCircle} variant="secondary" target="_blank" rel="noopener noreferrer">
               Hablar por WhatsApp
             </ButtonLink>
           </div>

@@ -15,7 +15,7 @@ export const site = {
   description:
     'Desarrollamos páginas web, sistemas de agenda, software personalizado, automatización de procesos y auditorías de red para que pequeños negocios se vean más profesionales, se organicen mejor y trabajen con más eficiencia.',
   social: {
-    whatsapp: 'https://wa.me/message/JVP7TW7RPZQBJ1',
+    whatsapp: 'https://wa.me/50249638382?text=Hola%2C%20quiero%20cotizar%20un%20proyecto%20con%20PitDev.',
     instagram: 'https://www.instagram.com/pitdev.gt?igsh=YzVhYzNsMnM1Njhr',
     facebook: 'https://www.facebook.com/share/1Kq7zqMpze/?mibextid=wwXIfr',
   },
@@ -72,9 +72,4 @@ export const site = {
     'Páginas web • Software personalizado • Sistemas de agenda • Automatización • Auditorías de red',
 };
 
-export const getWhatsAppUrl = (message) => {
-  if (!message) return site.social.whatsapp;
-
-  const separator = site.social.whatsapp.includes('?') ? '&' : '?';
-  return `${site.social.whatsapp}${separator}text=${encodeURIComponent(message)}`;
-};
+export const getWhatsAppUrl = () => site.social.whatsapp;
