@@ -94,11 +94,20 @@ export default function Clients() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col gap-5 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-2xl font-bold text-white">¿Querés una página como estas?</p>
-            <p className="mt-2 max-w-2xl text-sm leading-7 text-pit-ink/70">
-              Convertimos tu idea, comunidad o negocio en una presencia web clara, moderna y lista para compartir.
+        <div className="relative mt-12 overflow-hidden rounded-lg border border-pit-neon/25 bg-pit-panel/[0.88] p-6 text-center shadow-panel sm:p-8 lg:flex lg:items-center lg:justify-between lg:gap-10 lg:p-9 lg:text-left">
+          <div
+            className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(57,255,136,0.16),transparent_18rem),linear-gradient(135deg,rgba(57,255,136,0.09),rgba(84,230,255,0.035)_44%,rgba(3,6,4,0.94))]"
+            aria-hidden="true"
+          />
+          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-pit-neon/80 to-transparent" aria-hidden="true" />
+
+          <div className="relative">
+            <p className="text-2xl font-bold text-white sm:text-3xl">
+              ¿Quieres una página web profesional para tu negocio?
+            </p>
+            <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-pit-ink/[0.74] sm:text-base lg:mx-0">
+              Creamos sitios modernos, rápidos y adaptados a tu marca para que tus clientes te encuentren,
+              conozcan tus servicios y confíen más en tu negocio.
             </p>
           </div>
           <ButtonLink
@@ -106,9 +115,9 @@ export default function Clients() {
             icon={MessageCircle}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto"
+            className="relative mt-6 w-full px-6 sm:mx-auto sm:w-auto lg:mx-0 lg:mt-0 lg:shrink-0"
           >
-            Cotizar por WhatsApp
+            Cotizar mi página web
           </ButtonLink>
         </div>
       </div>
