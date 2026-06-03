@@ -10,7 +10,7 @@ export default function Footer() {
           <p className="mt-2 text-sm leading-7 text-pit-ink/[0.62]">{site.footerServices}</p>
           <p className="mt-3 text-sm text-pit-ink/[0.44]">© 2026 PitDev. Todos los derechos reservados.</p>
         </div>
-        <SocialLinks className="justify-center md:justify-end" />
+        <SocialLinks showText className="justify-center md:justify-end" />
       </div>
     </footer>
   );
