@@ -4,8 +4,11 @@ import {
   Code2,
   Globe2,
   Network,
+  Package,
   Radar,
+  School,
   Sparkles,
+  UsersRound,
   Workflow,
 } from 'lucide-react';
 
@@ -22,6 +25,7 @@ export const site = {
   navItems: [
     { label: 'Inicio', href: '#inicio' },
     { label: 'Servicios', href: '#servicios' },
+    { label: 'Productos', href: '#productos' },
     { label: 'Proyectos', href: '#proyectos' },
     { label: 'Nosotros', href: '#nosotros' },
     { label: 'Contacto', href: '#contacto' },
@@ -40,12 +44,6 @@ export const site = {
       icon: Globe2,
     },
     {
-      title: 'Sistemas de agenda',
-      description:
-        'Agenda de citas conectada a Google Calendar para barberías, clínicas, salones y más.',
-      icon: CalendarClock,
-    },
-    {
       title: 'Software a medida',
       description: 'Herramientas creadas según las necesidades reales de tu negocio.',
       icon: Code2,
@@ -61,6 +59,40 @@ export const site = {
       description:
         'Revisión de conectividad, infraestructura, seguridad básica y recomendaciones para mejorar tu red.',
       icon: Network,
+    },
+  ],
+  products: [
+    {
+      id: 'school-lite',
+      name: 'PitDev School Lite',
+      shortDescription: 'Sistema digital para colegios pequeños y centros educativos.',
+      detail:
+        'PitDev School Lite es una solución pensada para colegios pequeños o instituciones educativas que necesitan presencia digital y una mejor organización. Incluye página informativa, formulario de admisión, base de datos de interesados, panel administrativo, noticias, eventos y galería. Sirve para mejorar la presentación del colegio, facilitar el proceso de inscripción y centralizar información importante.',
+      icon: School,
+    },
+    {
+      id: 'agenda',
+      name: 'PitDev Agenda',
+      shortDescription: 'Sistema de citas para negocios que trabajan con reservas.',
+      detail:
+        'PitDev Agenda está diseñado para barberías, clínicas, salones, psicólogos, dentistas, academias y otros negocios que agendan citas. Incluye control de clientes, citas, servicios, calendario, estados de cita, integración con WhatsApp y reportes básicos. Sirve para ordenar mejor las reservas, evitar citas perdidas y tener más control del día a día.',
+      icon: CalendarClock,
+    },
+    {
+      id: 'stock',
+      name: 'PitDev Stock',
+      shortDescription: 'Sistema de inventario y ventas para negocios pequeños.',
+      detail:
+        'PitDev Stock ayuda a controlar productos, entradas, salidas, stock bajo, ventas, caja y reportes. Está pensado para tiendas, pequeños comercios y negocios que necesitan saber qué tienen, qué venden y qué les hace falta. Sirve para reducir desorden, mejorar el control del inventario y apoyar la toma de decisiones.',
+      icon: Package,
+    },
+    {
+      id: 'crm-simple',
+      name: 'PitDev CRM Simple',
+      shortDescription: 'Sistema para seguimiento de clientes y cotizaciones.',
+      detail:
+        'PitDev CRM Simple está enfocado en empresas de servicios. Incluye clientes, seguimiento, cotizaciones, estados, tareas, historial y generación de PDF. Es útil para constructoras pequeñas, técnicos, agencias, instaladores, empresas de cámaras, internet, mantenimiento y negocios similares. Sirve para dar seguimiento a prospectos, organizar trabajos y mantener un mejor control comercial.',
+      icon: UsersRound,
     },
   ],
   projects: [
@@ -89,8 +121,7 @@ export const site = {
     { label: 'Adaptación al negocio', icon: Radar },
     { label: 'Enfoque en resultados', icon: Workflow },
   ],
-  footerServices:
-    'Páginas web • Software personalizado • Sistemas de agenda • Automatización • Auditorías de red',
+  footerServices: 'Páginas web • Software personalizado • Automatización • Auditorías de red',
 };
 
 export const getWhatsAppUrl = () => site.social.whatsapp;

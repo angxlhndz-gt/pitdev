@@ -5,6 +5,7 @@ import FloatingWhatsApp from './components/FloatingWhatsApp.jsx';
 import Footer from './components/Footer.jsx';
 import Hero from './components/Hero.jsx';
 import Navbar from './components/Navbar.jsx';
+import Products from './components/Products.jsx';
 import Services from './components/Services.jsx';
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
       <Navbar />
       <Hero />
       <Services />
+      <Products />
       <Clients />
       <About />
       <Contact />

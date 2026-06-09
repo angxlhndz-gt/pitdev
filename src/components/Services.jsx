@@ -10,7 +10,7 @@ export default function Services() {
           Herramientas claras, utiles y escalables para negocios que necesitan presencia, control y eficiencia.
         </SectionHeader>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {site.services.map(({ title, description, icon: Icon }) => (
             <article
               key={title}
