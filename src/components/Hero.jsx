@@ -2,7 +2,7 @@ import { ArrowDown, MessageCircle, Sparkles } from 'lucide-react';
 import { getWhatsAppUrl, site } from '../config/site.js';
 import AnimatedNetworkBackground from './AnimatedNetworkBackground.jsx';
 import ButtonLink from './ButtonLink.jsx';
-import LaptopCodeShowcase from './LaptopCodeShowcase.jsx';
+import LaptopScrollAnimation from './LaptopScrollAnimation.jsx';
 
 export default function Hero() {
   const whatsappUrl = getWhatsAppUrl();
@@ -15,8 +15,12 @@ export default function Hero() {
         className="absolute inset-0 bg-[radial-gradient(circle_at_74%_34%,rgba(57,255,136,0.14),transparent_28rem),radial-gradient(circle_at_88%_70%,rgba(84,230,255,0.09),transparent_22rem),linear-gradient(90deg,rgba(3,6,4,0.96)_0%,rgba(3,6,4,0.78)_50%,rgba(3,6,4,0.6)_100%)]"
         aria-hidden="true"
       />
+      <div
+        className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent via-pit-black/55 to-[#050907]"
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pb-16 pt-8 sm:px-6 lg:grid-cols-[1.02fr_0.78fr] lg:px-8">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pb-20 pt-8 sm:px-6 lg:grid-cols-[0.96fr_0.9fr] lg:px-8">
         <div className="max-w-3xl">
           <div
             className="mb-6 inline-flex items-center gap-2 rounded-lg border border-pit-neon/[0.35] bg-pit-neon/[0.08] px-3 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-pit-neon"
@@ -60,7 +64,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <LaptopCodeShowcase />
+        <LaptopScrollAnimation />
       </div>
     </section>
   );

@@ -5,7 +5,7 @@ export default function Services() {
   return (
     <section id="servicios" className="relative border-t border-white/10 bg-[#050907] px-4 py-20 sm:px-6 lg:px-8">
       <div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_12%_14%,rgba(57,255,136,0.08),transparent_22rem),radial-gradient(circle_at_86%_70%,rgba(84,230,255,0.055),transparent_20rem)]"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(57,255,136,0.13),transparent_18rem),radial-gradient(circle_at_12%_14%,rgba(57,255,136,0.08),transparent_22rem),radial-gradient(circle_at_86%_70%,rgba(84,230,255,0.055),transparent_20rem)]"
         aria-hidden="true"
       />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-pit-neon/70 to-transparent" aria-hidden="true" />
@@ -14,7 +14,12 @@ export default function Services() {
           Herramientas claras, utiles y escalables para negocios que necesitan presencia, control y eficiencia.
         </SectionHeader>
 
-        <div className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+        <div
+          className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          data-stagger
+          data-stagger-distance="46"
+          data-stagger-start="top 76%"
+        >
           {site.services.map(({ title, description, icon: Icon }) => (
             <article
               key={title}
