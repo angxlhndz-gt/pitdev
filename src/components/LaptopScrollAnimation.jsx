@@ -10,13 +10,13 @@ const productPills = [
 ];
 
 const codeLines = [
-  { code: 'const pitdev = deploy({', tone: 'text-pit-mint' },
-  { code: '  web: "presencia profesional",', tone: 'text-pit-ink/85' },
+  { code: 'const negocio = PitDev.launch({', tone: 'text-white' },
+  { code: '  web: "sitio profesional",', tone: 'text-pit-neon' },
   { code: '  agenda: sync("WhatsApp"),', tone: 'text-pit-cyan' },
-  { code: '  crm: trackClients(),', tone: 'text-pit-ink/85' },
-  { code: '  stock: realtimeInventory(),', tone: 'text-pit-ink/85' },
-  { code: '  network: auditReady()', tone: 'text-pit-neon' },
-  { code: '});', tone: 'text-pit-mint' },
+  { code: '  crm: pipeline("clientes"),', tone: 'text-pit-mint' },
+  { code: '  stock: liveInventory(),', tone: 'text-pit-ink' },
+  { code: '  red: auditNetwork()', tone: 'text-pit-neon' },
+  { code: '});', tone: 'text-white' },
 ];
 
 const keyboardRows = [13, 12, 11, 9];
@@ -26,6 +26,7 @@ export default function LaptopScrollAnimation() {
   const sceneRef = useRef(null);
   const screenRef = useRef(null);
   const displayRef = useRef(null);
+  const coverRef = useRef(null);
   const shadowRef = useRef(null);
   const chipRefs = useRef([]);
 
@@ -41,11 +42,14 @@ export default function LaptopScrollAnimation() {
     const context = gsap.context(() => {
       const hero = rootRef.current.closest('#inicio') || rootRef.current;
       const chips = chipRefs.current.filter(Boolean);
+      const deckDetails = rootRef.current.querySelectorAll(
+        '.pit-laptop-keyboard, .pit-laptop-trackpad, .pit-laptop-speaker',
+      );
 
       gsap.set(screenRef.current, {
         rotateX: 0,
-        transformOrigin: '50% 100%',
-        transformPerspective: 1400,
+        transformOrigin: '50% calc(100% + 10px)',
+        transformPerspective: 1300,
       });
       gsap.set(sceneRef.current, {
         rotateX: 0,
@@ -54,6 +58,7 @@ export default function LaptopScrollAnimation() {
         y: 0,
         transformPerspective: 1400,
       });
+      gsap.set(coverRef.current, { autoAlpha: 0, scaleY: 0.82, y: -18 });
 
       gsap.fromTo(
         sceneRef.current,
@@ -78,8 +83,8 @@ export default function LaptopScrollAnimation() {
           scrollTrigger: {
             trigger: hero,
             start: 'top top',
-            end: '+=900',
-            scrub: 1,
+            end: '+=460',
+            scrub: 0.7,
             pin: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
@@ -87,11 +92,13 @@ export default function LaptopScrollAnimation() {
         });
 
         closeTimeline
-          .to(sceneRef.current, { y: 58, scale: 0.86, rotateX: 8, rotateY: 9 }, 0)
-          .to(screenRef.current, { rotateX: -86, y: 22, z: -24 }, 0)
-          .to(displayRef.current, { autoAlpha: 0.22, filter: 'blur(1.6px)' }, 0.05)
-          .to(shadowRef.current, { autoAlpha: 0.72, scaleX: 0.72, scaleY: 0.72 }, 0)
-          .to(chips, { autoAlpha: 0, y: -24, scale: 0.78, stagger: 0.035 }, 0.06);
+          .to(sceneRef.current, { y: 34, scale: 0.9, rotateX: 5, rotateY: 5 }, 0)
+          .to(screenRef.current, { rotateX: -72, y: 16, z: 18 }, 0)
+          .to(shadowRef.current, { autoAlpha: 0.78, scaleX: 0.76, scaleY: 0.76 }, 0)
+          .to(chips, { autoAlpha: 0, y: -18, scale: 0.82, stagger: 0.025 }, 0.1)
+          .to(deckDetails, { autoAlpha: 0.18, y: 4 }, 0.52)
+          .to(coverRef.current, { autoAlpha: 1, scaleY: 1, y: 0 }, 0.5)
+          .to(displayRef.current, { autoAlpha: 0.48, filter: 'blur(0.7px)' }, 0.72);
 
         return () => closeTimeline.kill();
       });
@@ -102,15 +109,15 @@ export default function LaptopScrollAnimation() {
           scrollTrigger: {
             trigger: rootRef.current,
             start: 'top 70%',
-            end: 'bottom 18%',
-            scrub: 1.1,
+            end: 'bottom 44%',
+            scrub: 0.8,
             invalidateOnRefresh: true,
           },
         });
 
         mobileTimeline
-          .to(sceneRef.current, { y: -18, scale: 0.96, rotateX: 4, rotateY: -2 }, 0)
-          .to(screenRef.current, { rotateX: -24, y: 4 }, 0)
+          .to(sceneRef.current, { y: -12, scale: 0.97, rotateX: 3, rotateY: -2 }, 0)
+          .to(screenRef.current, { rotateX: -18, y: 2 }, 0)
           .to(chips, { autoAlpha: 0.45, y: -10, stagger: 0.03 }, 0);
 
         return () => mobileTimeline.kill();
@@ -177,34 +184,64 @@ export default function LaptopScrollAnimation() {
                         <span className="size-2.5 rounded-full bg-white/40" />
                       </div>
                       <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-pit-ink/50">
-                        pitdev.deploy.jsx
+                        pitdev.workspace
                       </span>
                     </div>
                   </div>
 
-                  <div className="relative px-4 py-5 sm:px-5">
-                    <div className="absolute right-4 top-5 hidden rounded-lg border border-pit-neon/20 bg-pit-neon/10 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-pit-neon sm:block">
-                      build green
+                  <div className="pit-editor-shell relative">
+                    <div className="pit-editor-sidebar" aria-hidden="true">
+                      {['WEB', 'API', 'CRM'].map((item) => (
+                        <span key={item}>{item}</span>
+                      ))}
                     </div>
 
-                    <div className="space-y-2.5 pr-0 font-mono text-[0.68rem] leading-5 sm:pr-28 sm:text-xs md:text-sm">
-                      {codeLines.map((line, index) => (
-                        <p
-                          key={line.code}
-                          className="code-type-line flex min-w-0 items-start gap-3"
-                          style={{ '--line-delay': `${0.45 + index * 0.32}s` }}
-                        >
-                          <span className="w-5 shrink-0 select-none text-right text-pit-neon/45">
-                            {String(index + 1).padStart(2, '0')}
+                    <div className="pit-editor-code">
+                      <div className="mb-4 flex flex-wrap items-center gap-2">
+                        {['deploy: listo', 'agenda: sync', 'red: segura'].map((item) => (
+                          <span
+                            key={item}
+                            className="rounded-md border border-pit-neon/25 bg-pit-neon/10 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-pit-neon"
+                          >
+                            {item}
                           </span>
-                          <span className={`min-w-0 ${line.tone}`}>{line.code}</span>
-                        </p>
-                      ))}
+                        ))}
+                      </div>
+
+                      <div className="space-y-2.5 font-mono text-[0.78rem] leading-5 sm:text-[0.84rem] md:text-[0.92rem]">
+                        {codeLines.map((line, index) => (
+                          <p
+                            key={line.code}
+                            className="code-type-line flex min-w-0 items-start gap-3"
+                            style={{ '--line-delay': `${0.12 + index * 0.13}s` }}
+                          >
+                            <span className="w-5 shrink-0 select-none text-right text-pit-neon/55">
+                              {String(index + 1).padStart(2, '0')}
+                            </span>
+                            <span className={`min-w-0 drop-shadow-[0_0_10px_rgba(57,255,136,0.18)] ${line.tone}`}>
+                              {line.code}
+                            </span>
+                          </p>
+                        ))}
+                      </div>
+
+                      <div className="mt-5 grid grid-cols-3 gap-2">
+                        {['online', 'ventas', 'control'].map((item) => (
+                          <div key={item} className="rounded-md border border-white/10 bg-white/[0.055] px-2 py-2">
+                            <span className="block h-1.5 rounded-full bg-pit-neon shadow-[0_0_14px_rgba(57,255,136,0.78)]" />
+                            <span className="mt-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-pit-ink/65">
+                              {item}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div ref={coverRef} className="pit-laptop-closing-cover" aria-hidden="true" />
 
             <div className="pit-laptop-hinge" aria-hidden="true">
               <span />
