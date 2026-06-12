@@ -2,7 +2,7 @@ import { ArrowDown, MessageCircle, Sparkles } from 'lucide-react';
 import { getWhatsAppUrl, site } from '../config/site.js';
 import AnimatedNetworkBackground from './AnimatedNetworkBackground.jsx';
 import ButtonLink from './ButtonLink.jsx';
-import LaptopScrollAnimation from './LaptopScrollAnimation.jsx';
+import PitDevInteractiveMachine from './PitDevInteractiveMachine.jsx';
 
 export default function Hero() {
   const whatsappUrl = getWhatsAppUrl();
@@ -64,7 +64,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <LaptopScrollAnimation />
+        <PitDevInteractiveMachine />
       </div>
     </section>
   );
