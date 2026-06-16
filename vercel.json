@@ -1,4 +1,14 @@
 {
+  "rewrites": [
+    {
+      "source": "/card",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/card/:path*",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/pitdev-wallet.pkpass",
