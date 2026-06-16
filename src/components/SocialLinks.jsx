@@ -19,7 +19,7 @@ const socials = [
   },
 ];
 
-const footerSocials = [
+const getFooterSocials = (labels) => [
   {
     label: 'Instagram',
     href: site.social.instagram,
@@ -39,15 +39,15 @@ const footerSocials = [
     text: '+502 4963 8382',
   },
   {
-    label: 'Correo',
+    label: labels?.emailLabel ?? 'Correo',
     href: 'mailto:pitdev.gt@gmail.com',
     icon: FaEnvelope,
     text: 'pitdev.gt@gmail.com',
   },
 ];
 
-export default function SocialLinks({ className = '', iconClassName = '', showText = false }) {
-  const links = showText ? footerSocials : socials;
+export default function SocialLinks({ className = '', iconClassName = '', labels, showText = false }) {
+  const links = showText ? getFooterSocials(labels) : socials;
   const wrapperClassName = showText
     ? `flex flex-wrap items-center gap-3 ${className}`
     : `flex items-center gap-2 ${className}`;
@@ -56,7 +56,7 @@ export default function SocialLinks({ className = '', iconClassName = '', showTe
     : `focus-ring grid size-10 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-pit-ink transition hover:border-pit-neon/60 hover:bg-pit-neon/10 hover:text-pit-neon ${iconClassName}`;
 
   return (
-    <div className={wrapperClassName} aria-label="Redes sociales de PitDev">
+    <div className={wrapperClassName} aria-label={labels?.ariaLabel ?? 'Redes sociales de PitDev'}>
       {links.map(({ label, href, icon: Icon, text }) => (
         <a
           key={label}

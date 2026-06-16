@@ -1,7 +1,6 @@
 import SectionHeader from './SectionHeader.jsx';
-import { site } from '../config/site.js';
 
-export default function Services() {
+export default function Services({ content }) {
   return (
     <section id="servicios" className="relative border-t border-white/10 bg-[#050907] px-4 py-20 sm:px-6 lg:px-8">
       <div
@@ -10,8 +9,8 @@ export default function Services() {
       />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-pit-neon/70 to-transparent" aria-hidden="true" />
       <div className="relative mx-auto max-w-7xl">
-        <SectionHeader eyebrow="Servicios" title="Soluciones digitales para operar mejor">
-          Herramientas claras, utiles y escalables para negocios que necesitan presencia, control y eficiencia.
+        <SectionHeader eyebrow={content.servicesSection.eyebrow} title={content.servicesSection.title}>
+          {content.servicesSection.description}
         </SectionHeader>
 
         <div
@@ -20,7 +19,7 @@ export default function Services() {
           data-stagger-distance="46"
           data-stagger-start="top 76%"
         >
-          {site.services.map(({ title, description, icon: Icon }) => (
+          {content.services.map(({ title, description, icon: Icon }) => (
             <article
               key={title}
               data-stagger-item

@@ -1,28 +1,8 @@
 import { CheckCircle2, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
-import { site } from '../config/site.js';
 import SectionHeader from './SectionHeader.jsx';
 
-const productMeta = {
-  'school-lite': {
-    label: 'Educación',
-    bullets: ['Admisiones', 'Panel admin', 'Eventos'],
-  },
-  agenda: {
-    label: 'Reservas',
-    bullets: ['Calendario', 'WhatsApp', 'Reportes'],
-  },
-  stock: {
-    label: 'Inventario',
-    bullets: ['Stock bajo', 'Ventas', 'Caja'],
-  },
-  'crm-simple': {
-    label: 'Comercial',
-    bullets: ['Clientes', 'Cotizaciones', 'Tareas'],
-  },
-};
-
-export default function Products() {
+export default function Products({ content }) {
   const [activeProduct, setActiveProduct] = useState(null);
 
   const toggleProduct = (id) => {
@@ -48,15 +28,15 @@ export default function Products() {
       />
 
       <div className="relative mx-auto max-w-7xl">
-        <SectionHeader eyebrow="Productos" title="Productos">
-          Soluciones listas para negocios que necesitan orden, control y crecimiento.
+        <SectionHeader eyebrow={content.productsSection.eyebrow} title={content.productsSection.title}>
+          {content.productsSection.description}
         </SectionHeader>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4" data-stagger>
-          {site.products.map(({ id, name, shortDescription, detail, icon: Icon }) => {
+          {content.products.map(({ id, name, shortDescription, detail, icon: Icon }) => {
             const isOpen = activeProduct === id;
             const detailsId = `product-details-${id}`;
-            const meta = productMeta[id];
+            const meta = content.productMeta[id];
 
             return (
               <article
@@ -100,7 +80,7 @@ export default function Products() {
                   </div>
 
                   <div className="mt-5 flex items-center justify-between gap-3 text-sm font-bold text-pit-neon">
-                    <span>{isOpen ? 'Ver menos' : 'Ver más'}</span>
+                    <span>{isOpen ? content.productsSection.showLess : content.productsSection.showMore}</span>
                     <ChevronDown
                       className={`size-4 shrink-0 transition duration-300 ${isOpen ? 'rotate-180' : ''}`}
                       aria-hidden="true"

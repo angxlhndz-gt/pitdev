@@ -1,6 +1,6 @@
 import { ExternalLink, Globe2, MessageCircle, MonitorSmartphone } from 'lucide-react';
 import { useState } from 'react';
-import { getWhatsAppUrl, site } from '../config/site.js';
+import { getWhatsAppUrl } from '../config/site.js';
 import ButtonLink from './ButtonLink.jsx';
 import SectionHeader from './SectionHeader.jsx';
 
@@ -47,7 +47,7 @@ function ProjectPreview({ project }) {
   );
 }
 
-export default function Clients() {
+export default function Clients({ content }) {
   return (
     <section id="proyectos" className="relative border-t border-white/10 bg-pit-black px-4 py-20 sm:px-6 lg:px-8">
       <div
@@ -60,13 +60,12 @@ export default function Clients() {
       />
 
       <div className="relative mx-auto max-w-7xl">
-        <SectionHeader eyebrow="Proyectos" title="Clientes y trabajos realizados">
-          Estos son algunos proyectos web desarrollados por PitDev para comunidades, marcas personales y
-          negocios que buscan tener presencia digital profesional.
+        <SectionHeader eyebrow={content.projectsSection.eyebrow} title={content.projectsSection.title}>
+          {content.projectsSection.description}
         </SectionHeader>
 
         <div className="grid gap-6 lg:grid-cols-2" data-stagger>
-          {site.projects.map((project) => (
+          {content.projects.map((project) => (
             <article
               key={project.title}
               data-stagger-item
@@ -87,7 +86,7 @@ export default function Clients() {
                   rel="noopener noreferrer"
                   className="focus-ring mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg border border-pit-neon/70 bg-pit-neon/10 px-5 py-3 text-sm font-bold text-pit-neon transition hover:border-pit-neon hover:bg-pit-neon hover:text-pit-black hover:shadow-glow sm:w-fit"
                 >
-                  <span>Ver página</span>
+                  <span>{content.projectsSection.viewPage}</span>
                   <ExternalLink className="size-4" aria-hidden="true" />
                 </a>
               </div>
@@ -107,11 +106,10 @@ export default function Clients() {
 
           <div className="relative">
             <p className="text-2xl font-bold text-white sm:text-3xl">
-              ¿Quieres una página web profesional para tu negocio?
+              {content.projectCta.title}
             </p>
             <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-pit-ink/[0.74] sm:text-base lg:mx-0">
-              Creamos sitios modernos, rápidos y adaptados a tu marca para que tus clientes te encuentren,
-              conozcan tus servicios y confíen más en tu negocio.
+              {content.projectCta.description}
             </p>
           </div>
           <ButtonLink
@@ -121,7 +119,7 @@ export default function Clients() {
             rel="noopener noreferrer"
             className="relative mt-6 w-full px-6 sm:mx-auto sm:w-auto lg:mx-0 lg:mt-0 lg:shrink-0"
           >
-            Cotizar mi página web
+            {content.projectCta.button}
           </ButtonLink>
         </div>
       </div>

@@ -1,24 +1,6 @@
-import { ChartNoAxesCombined, CheckCircle2, Sparkles, Workflow } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
-const storySteps = [
-  {
-    title: 'Negocio desordenado',
-    description: 'Citas, clientes, ventas e inventario dispersos entre mensajes, libretas y hojas de cálculo.',
-    icon: Workflow,
-  },
-  {
-    title: 'PitDev automatiza',
-    description: 'Convertimos procesos repetitivos en sistemas claros, conectados y adaptados a la operación real.',
-    icon: Sparkles,
-  },
-  {
-    title: 'Control, ventas y crecimiento',
-    description: 'Tu equipo trabaja con más orden, mejores datos y una presencia digital lista para vender.',
-    icon: ChartNoAxesCombined,
-  },
-];
-
-export default function Storytelling() {
+export default function Storytelling({ content }) {
   return (
     <section className="relative border-t border-white/10 bg-pit-black px-4 py-20 sm:px-6 lg:px-8">
       <div
@@ -34,26 +16,25 @@ export default function Storytelling() {
       <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.74fr_1fr] lg:items-start">
         <div className="lg:sticky lg:top-28" data-animate="left">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-pit-neon">
-            Del problema a la solución
+            {content.storytelling.eyebrow}
           </p>
           <h2 className="max-w-xl text-3xl font-semibold tracking-normal text-white sm:text-4xl">
-            Menos improvisación. Más control operativo.
+            {content.storytelling.title}
           </h2>
           <p className="mt-5 max-w-xl text-base leading-8 text-pit-ink/[0.78] sm:text-lg">
-            PitDev toma lo que hoy consume tiempo en tu negocio y lo convierte en herramientas digitales
-            simples, medibles y listas para crecer contigo.
+            {content.storytelling.description}
           </p>
 
           <div className="mt-8 inline-flex items-center gap-3 rounded-lg border border-pit-neon/25 bg-pit-neon/10 px-4 py-3 text-sm font-semibold text-pit-neon shadow-glow">
             <CheckCircle2 className="size-5" aria-hidden="true" />
-            <span>Proceso claro desde diagnóstico hasta entrega</span>
+            <span>{content.storytelling.badge}</span>
           </div>
         </div>
 
         <div className="relative" data-stagger data-stagger-start="top 78%">
           <div className="absolute bottom-8 left-6 top-8 hidden w-px bg-gradient-to-b from-pit-neon/80 via-pit-neon/25 to-transparent sm:block" />
           <div className="grid gap-5">
-            {storySteps.map(({ title, description, icon: Icon }, index) => (
+            {content.storytelling.steps.map(({ title, description, icon: Icon }, index) => (
               <article
                 key={title}
                 data-stagger-item
@@ -68,7 +49,7 @@ export default function Storytelling() {
                 </div>
                 <div className="relative">
                   <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-pit-neon/70">
-                    Paso {String(index + 1).padStart(2, '0')}
+                    {content.storytelling.stepLabel} {String(index + 1).padStart(2, '0')}
                   </p>
                   <h3 className="mt-2 text-xl font-bold text-white">{title}</h3>
                   <p className="mt-3 text-sm leading-7 text-pit-ink/70">{description}</p>

@@ -1,10 +1,10 @@
 import { ArrowDown, MessageCircle, Sparkles } from 'lucide-react';
-import { getWhatsAppUrl, site } from '../config/site.js';
+import { getWhatsAppUrl } from '../config/site.js';
 import AnimatedNetworkBackground from './AnimatedNetworkBackground.jsx';
 import ButtonLink from './ButtonLink.jsx';
 import PremiumLaptopShowcase from './PremiumLaptopShowcase.jsx';
 
-export default function Hero() {
+export default function Hero({ content }) {
   const whatsappUrl = getWhatsAppUrl();
 
   return (
@@ -29,7 +29,7 @@ export default function Hero() {
             data-animate-start="top 96%"
           >
             <Sparkles className="size-4" aria-hidden="true" />
-            {site.tagline}
+            {content.tagline}
           </div>
           <h1
             className="max-w-5xl text-5xl font-black leading-tight tracking-normal text-white sm:text-6xl lg:text-7xl"
@@ -37,7 +37,7 @@ export default function Hero() {
             data-animate-distance="26"
             data-animate-start="top 96%"
           >
-            Tecnología que impulsa tu negocio
+            {content.hero.title}
           </h1>
           <p
             className="mt-6 max-w-2xl text-lg leading-8 text-pit-ink/[0.84] sm:text-xl"
@@ -45,8 +45,7 @@ export default function Hero() {
             data-animate-distance="30"
             data-animate-start="top 96%"
           >
-            Creamos páginas web, sistemas de agenda, software personalizado, automatización y auditorías
-            de red para negocios que quieren crecer.
+            {content.hero.description}
           </p>
 
           <div
@@ -56,15 +55,15 @@ export default function Hero() {
             data-animate-start="top 96%"
           >
             <ButtonLink href="#servicios" icon={ArrowDown}>
-              Ver servicios
+              {content.hero.servicesCta}
             </ButtonLink>
             <ButtonLink href={whatsappUrl} icon={MessageCircle} variant="secondary" target="_blank" rel="noopener noreferrer">
-              Hablar por WhatsApp
+              {content.hero.whatsappCta}
             </ButtonLink>
           </div>
         </div>
 
-        <PremiumLaptopShowcase />
+        <PremiumLaptopShowcase content={content} />
       </div>
     </section>
   );

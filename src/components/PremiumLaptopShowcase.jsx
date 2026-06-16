@@ -1,19 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from '../lib/gsap.js';
 
-const codeLines = [
-  { code: 'const pitdev = deploy({', tone: 'text-white' },
-  { code: '  web: "presencia profesional",', tone: 'text-pit-neon' },
-  { code: '  agenda: "reservas inteligentes",', tone: 'text-pit-cyan' },
-  { code: '  crm: "clientes ordenados",', tone: 'text-pit-mint' },
-  { code: '  stock: "inventario claro",', tone: 'text-pit-ink' },
-  { code: '  network: "infraestructura estable",', tone: 'text-pit-neon' },
-  { code: '});', tone: 'text-white' },
-];
-
 const keyboardRows = [13, 12, 11, 9];
 
-export default function PremiumLaptopShowcase() {
+export default function PremiumLaptopShowcase({ content }) {
   const rootRef = useRef(null);
   const laptopRef = useRef(null);
   const glowRef = useRef(null);
@@ -77,7 +67,7 @@ export default function PremiumLaptopShowcase() {
     <div
       ref={rootRef}
       className="premium-laptop-wrap relative mx-auto min-h-[430px] w-full max-w-[660px] py-8 sm:min-h-[520px] lg:py-0"
-      aria-label="Laptop premium de PitDev mostrando código"
+      aria-label={content.laptop.ariaLabel}
     >
       <div ref={glowRef} className="premium-laptop-glow" aria-hidden="true" />
 
@@ -101,13 +91,13 @@ export default function PremiumLaptopShowcase() {
 
               <div className="premium-editor-content">
                 <div className="premium-editor-status">
-                  {['BUILD READY', 'SYNC ACTIVE', 'DEPLOY ONLINE'].map((item) => (
+                  {content.laptop.status.map((item) => (
                     <span key={item}>{item}</span>
                   ))}
                 </div>
 
                 <div ref={codeRef} className="premium-code-block">
-                  {codeLines.map((line, index) => (
+                  {content.laptop.codeLines.map((line, index) => (
                     <p
                       key={line.code}
                       className="premium-code-line flex min-w-0 items-start gap-3"
