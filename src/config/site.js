@@ -25,7 +25,7 @@ export const site = {
   social: {
     whatsapp: 'https://wa.me/50249638382?text=Hola%2C%20quiero%20cotizar%20un%20proyecto%20con%20PitDev.',
     instagram: 'https://www.instagram.com/pitdev.gt?igsh=YzVhYzNsMnM1Njhr',
-    facebook: 'https://www.facebook.com/share/1Kq7zqMpze/?mibextid=wwXIfr',
+    facebook: 'https://www.facebook.com/profile.php?id=61590269683371',
   },
 };
 

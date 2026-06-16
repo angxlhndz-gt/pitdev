@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import About from './components/About.jsx';
 import Clients from './components/Clients.jsx';
 import Contact from './components/Contact.jsx';
+import DigitalCardPage from './components/DigitalCardPage.jsx';
 import FloatingWhatsApp from './components/FloatingWhatsApp.jsx';
 import Footer from './components/Footer.jsx';
 import Hero from './components/Hero.jsx';
@@ -24,6 +25,17 @@ const getInitialLanguage = () => {
 };
 
 export default function App() {
+  const currentPath =
+    typeof window === 'undefined' ? '/' : window.location.pathname.replace(/\/+$/, '') || '/';
+
+  if (currentPath === '/card') {
+    return <DigitalCardPage />;
+  }
+
+  return <LandingPage />;
+}
+
+function LandingPage() {
   const [language, setLanguage] = useState(getInitialLanguage);
   const content = getSiteContent(language);
 

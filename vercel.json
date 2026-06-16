@@ -1,0 +1,17 @@
+{
+  "headers": [
+    {
+      "source": "/pitdev-wallet.pkpass",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/vnd.apple.pkpass"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"pitdev-wallet.pkpass\""
+        }
+      ]
+    }
+  ]
+}
