@@ -42,7 +42,7 @@ const content = {
     navItems: [
       { label: 'Inicio', href: '/' },
       { label: 'Servicios', href: '/servicios' },
-      { label: 'Productos Digitales', href: '/productos' },
+      { label: 'Soluciones', href: '/productos' },
       { label: 'Proyectos', href: '/proyectos' },
       { label: 'Contacto', href: '/contacto' },
     ],
@@ -74,9 +74,9 @@ const content = {
     hero: {
       title: 'Tecnología que impulsa tu negocio',
       description:
-        'Creamos páginas web, sistemas de agenda, software personalizado, automatización y auditorías de red para negocios que quieren crecer.',
+        'Creamos páginas web, sistemas de agenda, software personalizado, automatización y auditorías de red para que tu negocio se vea más profesional, trabaje con más orden y convierta mejor a sus clientes.',
       servicesCta: 'Ver servicios',
-      whatsappCta: 'Hablar por WhatsApp',
+      whatsappCta: 'Cotizar por WhatsApp',
     },
     routeMeta: {
       home: {
@@ -390,7 +390,7 @@ const content = {
     navItems: [
       { label: 'Home', href: '/' },
       { label: 'Services', href: '/servicios' },
-      { label: 'Digital Products', href: '/productos' },
+      { label: 'Solutions', href: '/productos' },
       { label: 'Projects', href: '/proyectos' },
       { label: 'Contact', href: '/contacto' },
     ],
@@ -422,9 +422,9 @@ const content = {
     hero: {
       title: 'Technology that moves your business forward',
       description:
-        'We create websites, scheduling systems, custom software, automation, and network audits for businesses ready to grow.',
+        'We build websites, scheduling systems, custom software, automation, and network audits so your business looks more professional, works with better organization, and converts more customers.',
       servicesCta: 'View services',
-      whatsappCta: 'Talk on WhatsApp',
+      whatsappCta: 'Quote on WhatsApp',
     },
     routeMeta: {
       home: {
