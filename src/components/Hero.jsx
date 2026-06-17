@@ -54,7 +54,7 @@ export default function Hero({ content }) {
             data-animate-distance="34"
             data-animate-start="top 96%"
           >
-            <ButtonLink href="#servicios" icon={ArrowDown}>
+            <ButtonLink href="/servicios" icon={ArrowDown}>
               {content.hero.servicesCta}
             </ButtonLink>
             <ButtonLink href={whatsappUrl} icon={MessageCircle} variant="secondary" target="_blank" rel="noopener noreferrer">

@@ -2,8 +2,9 @@ import { CheckCircle2, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import SectionHeader from './SectionHeader.jsx';
 
-export default function Products({ content }) {
+export default function Products({ content, variant = 'default', showHeader = true }) {
   const [activeProduct, setActiveProduct] = useState(null);
+  const isSpacious = variant === 'spacious';
 
   const toggleProduct = (id) => {
     setActiveProduct(activeProduct === id ? null : id);
@@ -28,11 +29,13 @@ export default function Products({ content }) {
       />
 
       <div className="relative mx-auto max-w-7xl">
-        <SectionHeader eyebrow={content.productsSection.eyebrow} title={content.productsSection.title}>
-          {content.productsSection.description}
-        </SectionHeader>
+        {showHeader ? (
+          <SectionHeader eyebrow={content.productsSection.eyebrow} title={content.productsSection.title}>
+            {content.productsSection.description}
+          </SectionHeader>
+        ) : null}
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4" data-stagger>
+        <div className={isSpacious ? 'grid gap-5 lg:grid-cols-2' : 'grid gap-4 md:grid-cols-2 xl:grid-cols-4'} data-stagger>
           {content.products.map(({ id, name, shortDescription, detail, icon: Icon }) => {
             const isOpen = activeProduct === id;
             const detailsId = `product-details-${id}`;
@@ -48,7 +51,9 @@ export default function Products({ content }) {
                 aria-controls={detailsId}
                 onClick={() => toggleProduct(id)}
                 onKeyDown={(event) => handleProductKeyDown(event, id)}
-                className={`group relative flex h-full min-h-[360px] cursor-pointer flex-col overflow-hidden rounded-lg border bg-white/[0.035] p-5 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.62] hover:bg-pit-neon/[0.055] hover:shadow-[0_24px_80px_rgba(57,255,136,0.12)] focus-ring ${
+                className={`group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-lg border bg-white/[0.035] shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.62] hover:bg-pit-neon/[0.055] hover:shadow-[0_24px_80px_rgba(57,255,136,0.12)] focus-ring ${
+                  isSpacious ? 'min-h-[320px] p-6 sm:p-7' : 'min-h-[360px] p-5'
+                } ${
                   isOpen ? 'border-pit-neon/70 bg-pit-neon/[0.06] shadow-glow' : 'border-white/10'
                 }`}
               >

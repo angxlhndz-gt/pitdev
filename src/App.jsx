@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
-import About from './components/About.jsx';
-import Clients from './components/Clients.jsx';
-import Contact from './components/Contact.jsx';
 import DigitalCardPage from './components/DigitalCardPage.jsx';
-import FloatingWhatsApp from './components/FloatingWhatsApp.jsx';
-import Footer from './components/Footer.jsx';
-import Hero from './components/Hero.jsx';
-import Navbar from './components/Navbar.jsx';
-import Products from './components/Products.jsx';
-import Services from './components/Services.jsx';
-import Storytelling from './components/Storytelling.jsx';
+import Layout from './components/Layout.jsx';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { defaultLanguage, getSiteContent, isSupportedLanguage } from './config/site.js';
-import useScrollAnimations from './hooks/useScrollAnimations.js';
+import ContactPage from './pages/ContactPage.jsx';
+import HomePage from './pages/HomePage.jsx';
+import ProductsPage from './pages/ProductsPage.jsx';
+import ProjectsPage from './pages/ProjectsPage.jsx';
+import ServicesPage from './pages/ServicesPage.jsx';
 
 const languageStorageKey = 'pitdev-language';
 
@@ -25,43 +21,85 @@ const getInitialLanguage = () => {
 };
 
 export default function App() {
-  const currentPath =
-    typeof window === 'undefined' ? '/' : window.location.pathname.replace(/\/+$/, '') || '/';
-
-  if (currentPath === '/card') {
-    return <DigitalCardPage />;
-  }
-
-  return <LandingPage />;
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
 
-function LandingPage() {
+function AppRoutes() {
   const [language, setLanguage] = useState(getInitialLanguage);
   const content = getSiteContent(language);
+  const location = useLocation();
 
-  useScrollAnimations();
+  useRouteMeta(content, language);
+  useScrollToRoute();
 
   useEffect(() => {
-    document.documentElement.lang = language;
-    document.title = content.meta.title;
     window.localStorage.setItem(languageStorageKey, language);
-
-    const description = document.querySelector('meta[name="description"]');
-    description?.setAttribute('content', content.meta.description);
-  }, [content.meta.description, content.meta.title, language]);
+  }, [language]);
 
   return (
-    <main className="min-h-screen overflow-hidden bg-pit-black text-white">
-      <Navbar content={content} language={language} onLanguageChange={setLanguage} />
-      <Hero content={content} />
-      <Services content={content} />
-      <Storytelling content={content} />
-      <Products content={content} />
-      <Clients content={content} />
-      <About content={content} />
-      <Contact content={content} />
-      <Footer content={content} />
-      <FloatingWhatsApp content={content} />
-    </main>
+    <Routes location={location}>
+      <Route path="/card/*" element={<DigitalCardPage />} />
+      <Route
+        element={<Layout content={content} language={language} onLanguageChange={setLanguage} />}
+      >
+        <Route index element={<HomePage content={content} />} />
+        <Route path="/servicios" element={<ServicesPage content={content} />} />
+        <Route path="/productos" element={<ProductsPage content={content} />} />
+        <Route path="/proyectos" element={<ProjectsPage content={content} />} />
+        <Route path="/contacto" element={<ContactPage content={content} />} />
+      </Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
+}
+
+function useRouteMeta(content, language) {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.startsWith('/card')) {
+      return;
+    }
+
+    const routeKeyByPath = {
+      '/': 'home',
+      '/servicios': 'services',
+      '/productos': 'products',
+      '/proyectos': 'projects',
+      '/contacto': 'contact',
+    };
+    const routeKey = routeKeyByPath[location.pathname] ?? 'home';
+    const meta = content.routeMeta?.[routeKey] ?? content.meta;
+
+    document.documentElement.lang = language;
+    document.title = meta.title;
+
+    const description = document.querySelector('meta[name="description"]');
+    description?.setAttribute('content', meta.description);
+  }, [content.meta, content.routeMeta, language, location.pathname]);
+}
+
+function useScrollToRoute() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.startsWith('/card')) {
+      return;
+    }
+
+    if (!location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      return;
+    }
+
+    const elementId = location.hash.slice(1);
+
+    window.setTimeout(() => {
+      document.getElementById(elementId)?.scrollIntoView({ block: 'start' });
+    }, 0);
+  }, [location.hash, location.pathname]);
 }

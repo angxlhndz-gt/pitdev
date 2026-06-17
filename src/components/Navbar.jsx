@@ -1,19 +1,35 @@
 import { Menu, MessageCircle, X } from 'lucide-react';
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { getWhatsAppUrl } from '../config/site.js';
 import LanguageSelector from './LanguageSelector.jsx';
 import SocialLinks from './SocialLinks.jsx';
 
 export default function Navbar({ content, language, onLanguageChange }) {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
   const quoteUrl = getWhatsAppUrl();
   const menuAriaLabel = isOpen ? content.navbar.closeMenuAriaLabel : content.navbar.openMenuAriaLabel;
+  const isActive = (href) => {
+    const [path, hash] = href.split('#');
+    const targetPath = path || '/';
+
+    if (hash) {
+      return location.pathname === targetPath && location.hash === `#${hash}`;
+    }
+
+    if (href === '/') {
+      return location.pathname === '/' && !location.hash;
+    }
+
+    return location.pathname === href || location.pathname.startsWith(`${href}/`);
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-pit-black/[0.78] backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <a
-          href="#inicio"
+        <Link
+          to="/"
           className="focus-ring flex min-w-0 items-center gap-3 rounded-lg"
           aria-label={content.navbar.homeAriaLabel}
         >
@@ -28,17 +44,19 @@ export default function Navbar({ content, language, onLanguageChange }) {
               {content.tagline}
             </span>
           </span>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-6 xl:flex">
           {content.navItems.map((item) => (
-            <a
+            <Link
               key={item.href}
-              href={item.href}
-              className="focus-ring rounded-lg text-sm font-medium text-pit-ink/[0.76] transition hover:text-pit-neon"
+              to={item.href}
+              className={`focus-ring rounded-lg text-sm font-medium transition hover:text-pit-neon ${
+                isActive(item.href) ? 'text-pit-neon' : 'text-pit-ink/[0.76]'
+              }`}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -77,14 +95,16 @@ export default function Navbar({ content, language, onLanguageChange }) {
         <div id="mobile-menu" className="border-t border-white/10 bg-pit-black/95 px-4 py-5 xl:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-3">
             {content.navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
-                href={item.href}
+                to={item.href}
                 onClick={() => setIsOpen(false)}
-                className="focus-ring rounded-lg px-2 py-3 text-sm font-semibold text-pit-ink transition hover:bg-white/[0.04] hover:text-pit-neon"
+                className={`focus-ring rounded-lg px-2 py-3 text-sm font-semibold transition hover:bg-white/[0.04] hover:text-pit-neon ${
+                  isActive(item.href) ? 'text-pit-neon' : 'text-pit-ink'
+                }`}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <LanguageSelector
               language={language}

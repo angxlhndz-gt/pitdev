@@ -5,14 +5,39 @@ import ButtonLink from './ButtonLink.jsx';
 import SectionHeader from './SectionHeader.jsx';
 import SocialLinks from './SocialLinks.jsx';
 
-export default function Contact({ content }) {
+export default function Contact({ content, showHeader = true, className = '' }) {
+  const spacingClass = showHeader ? 'py-20' : 'pb-20 pt-0';
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get('name') || '').trim();
+    const phone = String(formData.get('phone') || '').trim();
+    const projectType = String(formData.get('projectType') || '').trim();
+    const message = String(formData.get('message') || '').trim();
+    const whatsappMessage = [
+      content.contact.whatsappMessageIntro,
+      '',
+      `${content.contact.nameLabel}: ${name}`,
+      `${content.contact.phoneLabel}: ${phone}`,
+      `${content.contact.projectTypeLabel}: ${projectType}`,
+      `${content.contact.messageLabel}: ${message}`,
+    ].join('\n');
+    const whatsappUrl = `${getWhatsAppUrl().split('?')[0]}?text=${encodeURIComponent(whatsappMessage)}`;
+
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
-    <section id="contacto" className="relative bg-pit-black px-4 py-20 sm:px-6 lg:px-8">
+    <section id="contacto" className={`relative bg-pit-black px-4 ${spacingClass} sm:px-6 lg:px-8 ${className}`}>
       <div className="absolute inset-0 circuit-grid opacity-35" aria-hidden="true" />
       <div className="relative mx-auto max-w-7xl">
-        <SectionHeader eyebrow={content.contact.eyebrow} title={content.contact.title}>
-          {content.contact.description}
-        </SectionHeader>
+        {showHeader ? (
+          <SectionHeader eyebrow={content.contact.eyebrow} title={content.contact.title}>
+            {content.contact.description}
+          </SectionHeader>
+        ) : null}
 
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]" data-stagger>
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-6" data-stagger-item>
@@ -45,7 +70,11 @@ export default function Contact({ content }) {
             </div>
           </div>
 
-          <form className="rounded-lg border border-pit-neon/20 bg-pit-panel/[0.84] p-5 shadow-panel md:p-7" data-stagger-item>
+          <form
+            onSubmit={handleSubmit}
+            className="rounded-lg border border-pit-neon/20 bg-pit-panel/[0.84] p-5 shadow-panel md:p-7"
+            data-stagger-item
+          >
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-pit-ink">{content.contact.nameLabel}</span>
@@ -100,15 +129,13 @@ export default function Contact({ content }) {
               />
             </label>
 
-            <a
-              href={getWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="submit"
               className="focus-ring mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg border border-pit-neon bg-pit-neon px-5 py-3 text-sm font-bold text-pit-black shadow-glow transition hover:bg-pit-mint sm:w-auto"
             >
               <Send className="size-4" aria-hidden="true" />
               <span>{content.contact.submitButton}</span>
-            </a>
+            </button>
             <p className="mt-4 flex items-center gap-2 text-sm text-pit-ink/[0.55]">
               <ExternalLink className="size-4" aria-hidden="true" />
               {content.contact.whatsappNote}

@@ -40,12 +40,11 @@ const content = {
     description:
       'Desarrollamos páginas web, sistemas de agenda, software personalizado, automatización de procesos y auditorías de red para que pequeños negocios se vean más profesionales, se organicen mejor y trabajen con más eficiencia.',
     navItems: [
-      { label: 'Inicio', href: '#inicio' },
-      { label: 'Servicios', href: '#servicios' },
-      { label: 'Productos', href: '#productos' },
-      { label: 'Proyectos', href: '#proyectos' },
-      { label: 'Nosotros', href: '#nosotros' },
-      { label: 'Contacto', href: '#contacto' },
+      { label: 'Inicio', href: '/' },
+      { label: 'Servicios', href: '/servicios' },
+      { label: 'Productos Digitales', href: '/productos' },
+      { label: 'Proyectos', href: '/proyectos' },
+      { label: 'Contacto', href: '/contacto' },
     ],
     navbar: {
       homeAriaLabel: 'Ir al inicio de PitDev',
@@ -78,6 +77,102 @@ const content = {
         'Creamos páginas web, sistemas de agenda, software personalizado, automatización y auditorías de red para negocios que quieren crecer.',
       servicesCta: 'Ver servicios',
       whatsappCta: 'Hablar por WhatsApp',
+    },
+    routeMeta: {
+      home: {
+        title: 'PitDev | Soluciones digitales para negocios locales',
+        description:
+          'PitDev crea páginas web, software a medida, automatización y productos digitales para negocios locales.',
+      },
+      services: {
+        title: 'Servicios | PitDev',
+        description:
+          'Servicios digitales personalizados de PitDev para páginas web, software a medida, automatización y auditorías de red.',
+      },
+      products: {
+        title: 'Productos Digitales | PitDev',
+        description:
+          'Soluciones digitales de PitDev para agenda, inventario, CRM y centros educativos.',
+      },
+      projects: {
+        title: 'Proyectos | PitDev',
+        description:
+          'Clientes y trabajos realizados por PitDev para comunidades, marcas personales y negocios.',
+      },
+      contact: {
+        title: 'Contacto | PitDev',
+        description:
+          'Contacta a PitDev por WhatsApp, Instagram, Facebook o formulario para cotizar tu proyecto digital.',
+      },
+    },
+    homePage: {
+      aboutTitle: 'Sobre PitDev',
+      aboutDescription:
+        'Creamos soluciones digitales simples y funcionales para que negocios locales se presenten mejor, organicen su operación y atiendan con más eficiencia.',
+      servicesEyebrow: 'Servicios',
+      servicesTitle: 'Lo esencial para digitalizar tu negocio',
+      servicesDescription:
+        'Un resumen de las áreas donde ayudamos a negocios locales a mejorar su presencia, procesos y control operativo.',
+      servicesCta: 'Ver servicios',
+      productsEyebrow: 'Productos digitales',
+      productsTitle: 'Soluciones listas para operar mejor',
+      productsDescription:
+        'Productos pensados para negocios que necesitan orden, seguimiento y herramientas claras sin empezar desde cero.',
+      productsCta: 'Ver productos digitales',
+    },
+    servicesPage: {
+      eyebrow: 'Servicios',
+      title: 'Servicios',
+      description:
+        'Soluciones digitales personalizadas para negocios locales que necesitan verse mejor, trabajar con más orden y automatizar procesos clave.',
+      details: [
+        'Diseñamos sitios rápidos, claros y adaptados a tu marca para que tus clientes entiendan qué ofreces y cómo contactarte.',
+        'Creamos herramientas internas según la operación real de tu negocio, desde paneles administrativos hasta flujos de control.',
+        'Conectamos formularios, WhatsApp, correos, calendarios y procesos repetitivos para ahorrar tiempo y reducir errores.',
+        'Revisamos conectividad, equipos, seguridad básica y estructura de red para detectar mejoras prácticas.',
+      ],
+      processEyebrow: 'Cómo trabajamos',
+      processTitle: 'Un proceso claro desde la idea hasta la entrega',
+      processDescription:
+        'Trabajamos por etapas para entender el problema, proponer una solución viable y entregar herramientas útiles para el día a día.',
+      processSteps: [
+        {
+          title: 'Diagnóstico',
+          description: 'Revisamos la necesidad, el contexto del negocio y los puntos donde la tecnología puede aportar más valor.',
+        },
+        {
+          title: 'Propuesta',
+          description: 'Definimos alcance, prioridades, tiempos y una solución alineada al presupuesto y objetivo del negocio.',
+        },
+        {
+          title: 'Desarrollo',
+          description: 'Construimos la solución con avances revisables, cuidando experiencia, rendimiento y funcionamiento real.',
+        },
+        {
+          title: 'Entrega y soporte',
+          description: 'Publicamos, entregamos accesos y acompañamos los ajustes necesarios para que el uso sea claro.',
+        },
+      ],
+      ctaTitle: '¿Listo para cotizar un servicio?',
+      ctaDescription:
+        'Cuéntanos qué necesita tu negocio y te ayudamos a aterrizar una solución digital práctica.',
+      ctaButton: 'Cotizar un servicio',
+    },
+    productsPage: {
+      eyebrow: 'Productos Digitales',
+      title: 'Productos Digitales',
+      description:
+        'Soluciones digitales listas para adaptar a negocios que necesitan agenda, inventario, seguimiento comercial o gestión educativa.',
+      ctaTitle: '¿Quieres ver una solución aplicada a tu negocio?',
+      ctaDescription:
+        'Podemos revisar tu caso y recomendarte el producto digital más adecuado o una adaptación a medida.',
+      ctaButton: 'Solicitar demo o cotización',
+    },
+    contactPage: {
+      eyebrow: 'Contacto',
+      title: 'Contacto',
+      description:
+        'Conversemos sobre tu página web, sistema, automatización o producto digital. Te responderemos con una ruta clara para avanzar.',
     },
     laptop: {
       ariaLabel: 'Laptop premium de PitDev mostrando código',
@@ -273,6 +368,7 @@ const content = {
       messagePlaceholder: 'Cuéntanos qué necesitas',
       submitButton: 'Enviar por WhatsApp',
       whatsappNote: 'Se abrirá WhatsApp en una nueva pestaña.',
+      whatsappMessageIntro: 'Hola, quiero cotizar un proyecto con PitDev.',
     },
     footerServices: 'Páginas web • Software personalizado • Automatización • Auditorías de red',
     footer: {
@@ -292,12 +388,11 @@ const content = {
     description:
       'We build websites, scheduling systems, custom software, process automation, and network audits so small businesses look more professional, stay organized, and work more efficiently.',
     navItems: [
-      { label: 'Home', href: '#inicio' },
-      { label: 'Services', href: '#servicios' },
-      { label: 'Products', href: '#productos' },
-      { label: 'Projects', href: '#proyectos' },
-      { label: 'About', href: '#nosotros' },
-      { label: 'Contact', href: '#contacto' },
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/servicios' },
+      { label: 'Digital Products', href: '/productos' },
+      { label: 'Projects', href: '/proyectos' },
+      { label: 'Contact', href: '/contacto' },
     ],
     navbar: {
       homeAriaLabel: 'Go to PitDev home',
@@ -330,6 +425,102 @@ const content = {
         'We create websites, scheduling systems, custom software, automation, and network audits for businesses ready to grow.',
       servicesCta: 'View services',
       whatsappCta: 'Talk on WhatsApp',
+    },
+    routeMeta: {
+      home: {
+        title: 'PitDev | Digital solutions for local businesses',
+        description:
+          'PitDev builds websites, custom software, automation, and digital products for local businesses.',
+      },
+      services: {
+        title: 'Services | PitDev',
+        description:
+          'PitDev digital services for websites, custom software, automation, and network audits.',
+      },
+      products: {
+        title: 'Digital Products | PitDev',
+        description:
+          'PitDev digital solutions for scheduling, inventory, CRM, and education centers.',
+      },
+      projects: {
+        title: 'Projects | PitDev',
+        description:
+          'Clients and completed work by PitDev for communities, personal brands, and businesses.',
+      },
+      contact: {
+        title: 'Contact | PitDev',
+        description:
+          'Contact PitDev through WhatsApp, Instagram, Facebook, or the form to quote your digital project.',
+      },
+    },
+    homePage: {
+      aboutTitle: 'About PitDev',
+      aboutDescription:
+        'We create simple, practical digital solutions so local businesses can present themselves better, organize operations, and serve customers more efficiently.',
+      servicesEyebrow: 'Services',
+      servicesTitle: 'The essentials to digitize your business',
+      servicesDescription:
+        'A quick look at the areas where we help local businesses improve presence, processes, and operational control.',
+      servicesCta: 'View services',
+      productsEyebrow: 'Digital products',
+      productsTitle: 'Solutions ready to improve operations',
+      productsDescription:
+        'Products for businesses that need order, follow-up, and clear tools without starting from zero.',
+      productsCta: 'View digital products',
+    },
+    servicesPage: {
+      eyebrow: 'Services',
+      title: 'Services',
+      description:
+        'Custom digital solutions for local businesses that need a stronger presence, cleaner operations, and automation for key processes.',
+      details: [
+        'We design fast, clear websites tailored to your brand so customers understand what you offer and how to contact you.',
+        'We build internal tools around your actual operation, from admin panels to control workflows.',
+        'We connect forms, WhatsApp, email, calendars, and repetitive tasks to save time and reduce errors.',
+        'We review connectivity, devices, basic security, and network structure to identify practical improvements.',
+      ],
+      processEyebrow: 'How we work',
+      processTitle: 'A clear process from idea to delivery',
+      processDescription:
+        'We work in stages to understand the problem, propose a viable solution, and deliver tools that are useful in daily operations.',
+      processSteps: [
+        {
+          title: 'Diagnosis',
+          description: 'We review the need, business context, and areas where technology can create the most value.',
+        },
+        {
+          title: 'Proposal',
+          description: 'We define scope, priorities, timing, and a solution aligned with the business goal and budget.',
+        },
+        {
+          title: 'Development',
+          description: 'We build with reviewable progress, caring for experience, performance, and real-world behavior.',
+        },
+        {
+          title: 'Delivery and support',
+          description: 'We publish, hand over access, and support the adjustments needed so the solution is clear to use.',
+        },
+      ],
+      ctaTitle: 'Ready to quote a service?',
+      ctaDescription:
+        'Tell us what your business needs and we will help you shape a practical digital solution.',
+      ctaButton: 'Quote a service',
+    },
+    productsPage: {
+      eyebrow: 'Digital Products',
+      title: 'Digital Products',
+      description:
+        'Ready-to-adapt digital solutions for businesses that need scheduling, inventory, sales follow-up, or education management.',
+      ctaTitle: 'Want to see a solution applied to your business?',
+      ctaDescription:
+        'We can review your case and recommend the right digital product or a custom adaptation.',
+      ctaButton: 'Request demo or quote',
+    },
+    contactPage: {
+      eyebrow: 'Contact',
+      title: 'Contact',
+      description:
+        'Let’s talk about your website, system, automation, or digital product. We will reply with a clear path forward.',
     },
     laptop: {
       ariaLabel: 'Premium PitDev laptop showing code',
@@ -525,6 +716,7 @@ const content = {
       messagePlaceholder: 'Tell us what you need',
       submitButton: 'Send on WhatsApp',
       whatsappNote: 'WhatsApp will open in a new tab.',
+      whatsappMessageIntro: 'Hello, I want to quote a project with PitDev.',
     },
     footerServices: 'Websites • Custom software • Automation • Network audits',
     footer: {

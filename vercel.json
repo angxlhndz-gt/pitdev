@@ -7,6 +7,38 @@
     {
       "source": "/card/:path*",
       "destination": "/index.html"
+    },
+    {
+      "source": "/servicios",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/servicios/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/productos",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/productos/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/proyectos",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/proyectos/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contacto",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contacto/:path*",
+      "destination": "/index.html"
     }
   ],
   "headers": [

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { gsap } from '../lib/gsap.js';
+import { ScrollTrigger, gsap } from '../lib/gsap.js';
 
 const getAnimationFromVars = (element) => {
   const variant = element.dataset.animate;
@@ -73,6 +73,8 @@ export default function useScrollAnimations() {
         );
       });
     });
+
+    window.requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => context.revert();
   }, []);
