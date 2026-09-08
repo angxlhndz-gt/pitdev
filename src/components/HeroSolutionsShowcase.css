@@ -1,0 +1,152 @@
+.hero-solutions {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  min-width: 0;
+  margin-inline: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-solutions-aura {
+  position: absolute;
+  inset: 5% -8%;
+  background: radial-gradient(ellipse, #39ff8812, transparent 65%);
+}
+
+.hero-solutions-orbit {
+  position: absolute;
+  inset: 14% 8%;
+  border: 1px solid #39ff881c;
+  border-radius: 50%;
+  transform: rotate(-12deg);
+}
+
+.hero-solutions-orbit::after {
+  position: absolute;
+  inset: -22px 25px;
+  border: 1px dashed #39ff8814;
+  border-radius: inherit;
+  content: '';
+}
+
+.hero-solutions-stage {
+  position: relative;
+  height: 560px;
+  perspective: 1200px;
+}
+
+.hero-solution {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid #91c5a62b;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #14241b, #08110cef 65%), #08110c;
+  box-shadow: 0 18px 45px #0005, inset 0 1px 0 #ffffff06;
+  color: #dceee4;
+  transform-origin: center;
+}
+
+.hero-solution-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #ffffff09;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.hero-solution-heading > svg { flex-shrink: 0; color: #39ff88; }
+.hero-solution-status { width: 5px; height: 5px; margin-left: auto; border-radius: 50%; background: #39ff88; box-shadow: 0 0 8px #39ff8840; }
+.hero-solution--web { top: 28%; left: 8%; width: 86%; z-index: 1; }
+.hero-solution--agenda { top: 1%; right: 1%; width: 49%; z-index: 3; }
+.hero-solution--crm { top: 66%; left: 0; width: 48%; z-index: 4; }
+.hero-solution--stock { top: 73%; right: 0; width: 46%; z-index: 5; }
+.hero-solution--automation { top: 9%; left: 3%; width: 42%; z-index: 2; }
+.hero-ui-line { display: block; height: 4px; border-radius: 8px; background: #aec6b62a; }
+
+.hero-web-toolbar { display: flex; align-items: center; gap: 12px; padding: 15px 20px; }
+.hero-web-brand { margin-right: auto; color: #39ff88; font-size: 14px; font-weight: 750; }
+.hero-web-brand > span { color: #e5f5eb; }
+.hero-web-brand > i { display: inline-block; width: 4px; height: 4px; margin-left: 3px; border-radius: 50%; background: #39ff88; }
+.hero-web-toolbar > .hero-ui-line { width: 24px; }
+.hero-web-menu { width: 30px; height: 13px; border: 1px solid #39ff883b; border-radius: 3px; }
+.hero-web-preview { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 10px; min-height: 146px; padding: 6px 20px 15px; }
+.hero-web-copy > strong { display: block; max-width: 200px; margin: 12px 0; color: #edf7f1; font-size: 22px; font-weight: 600; line-height: 1.2; letter-spacing: -.6px; }
+.hero-web-eyebrow { display: block; width: 40px; height: 3px; background: #39ff88; border-radius: 8px; }
+.hero-web-copy > .hero-ui-line { width: 85%; margin: 6px 0; }
+.hero-web-copy > .hero-ui-line + .hero-ui-line { width: 60%; }
+.hero-web-cta { display: grid; place-items: center; width: 40px; height: 22px; margin-top: 14px; border-radius: 4px; color: #051009; background: #39ff88; }
+.hero-web-art { position: relative; height: 136px; perspective: 500px; }
+.hero-web-tile { position: absolute; width: 78%; height: 100px; border: 1px solid #39ff8838; border-radius: 8px; }
+.hero-web-tile--back { top: 3px; right: 0; background: linear-gradient(145deg, #1d4730, #102419); transform: rotate(-9deg); }
+.hero-web-tile--front { top: 29px; left: 0; background: linear-gradient(145deg, #152a1d, #09150e); transform: rotate(5deg); box-shadow: 0 12px 20px #0004; }
+.hero-web-tile > svg { width: 100%; height: 100%; padding: 8px; }
+.hero-web-footer { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 20px 20px; }
+.hero-web-footer > span { height: 22px; border: 1px solid #ffffff09; border-radius: 4px; background: #ffffff03; }
+
+.hero-calendar { padding: 12px; }
+.hero-calendar-days { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 8px; text-align: center; font-size: 12px; color: #8ca898; }
+.hero-calendar-days > span { padding: 3px 0; }
+.hero-calendar-days > .is-selected { border-radius: 4px; color: #39ff88; background: #39ff8815; }
+.hero-calendar-grid { position: relative; height: 72px; background-image: linear-gradient(90deg, #ffffff08 1px, transparent 1px), linear-gradient(#ffffff08 1px, transparent 1px); background-size: 20% 100%, 100% 24px; }
+.hero-booking { position: absolute; display: grid; place-items: center; width: 37%; height: 21px; border-left: 2px solid #39ff88; border-radius: 3px; background: #183b26; color: #baf2cf; font-size: 10px; }
+.hero-booking--one { top: 2px; left: 1%; }
+.hero-booking--two { top: 26px; left: 41%; background: #173332; border-color: #79c4b9; }
+.hero-booking--three { top: 50px; left: 61%; }
+
+.hero-crm-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; padding: 12px; }
+.hero-crm-column-label { display: block; width: 70%; height: 3px; margin-bottom: 10px; border-radius: 5px; background: #39ff8870; }
+.hero-crm-column:nth-child(2) .hero-crm-column-label { background: #70b7a7; }
+.hero-crm-column:nth-child(3) .hero-crm-column-label { background: #c3dfce; }
+.hero-crm-contact { display: grid; grid-template-columns: 14px 1fr; align-items: center; gap: 5px; margin-top: 6px; padding: 7px 5px; border: 1px solid #ffffff09; border-radius: 4px; background: #ffffff03; }
+.hero-crm-avatar { width: 12px; height: 12px; border-radius: 50%; background: linear-gradient(135deg, #7cc89b66, #284c3666); }
+.hero-crm-progress { grid-column: 1 / -1; width: 65%; height: 3px; border-radius: 3px; background: #39ff8828; }
+.hero-stock-list { display: grid; gap: 10px; padding: 12px 14px; }
+.hero-stock-row { display: flex; align-items: center; gap: 10px; }
+.hero-stock-package { display: grid; place-items: center; width: 22px; height: 22px; color: #9cbaa8; border-radius: 4px; background: #ffffff05; }
+.hero-stock-meter { flex: 1; height: 4px; overflow: hidden; background: #ffffff08; border-radius: 4px; }
+.hero-stock-meter > i { display: block; height: 100%; background: linear-gradient(90deg, #2d9958, #65df94); border-radius: inherit; }
+.hero-stock-value { font-size: 11px; color: #99afa2; font-variant-numeric: tabular-nums; }
+.hero-workflow { display: flex; align-items: center; padding: 14px; }
+.hero-workflow > span { display: grid; place-items: center; flex-shrink: 0; width: 32px; height: 32px; border: 1px solid #39ff8825; border-radius: 7px; color: #99baa6; background: #39ff8805; }
+.hero-workflow > i { flex: 1; height: 1px; background: #39ff8850; }
+.hero-workflow > .is-complete { color: #39ff88; background: #39ff8810; }
+
+@media (max-width: 1023px) {
+  .hero-solutions { max-width: 520px; }
+  .hero-solutions-stage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 12px; height: auto; perspective: none; }
+  .hero-solution { position: relative; inset: auto; width: auto; transform: none; box-shadow: 0 8px 24px #0003; }
+  .hero-solution--web { grid-column: 1 / -1; }
+  .hero-solution--automation { grid-column: 1 / -1; }
+  .hero-solution--stock { grid-column: 2; grid-row: 3; }
+  .hero-solution--crm { grid-column: 1; grid-row: 3; }
+  .hero-solution--agenda { grid-column: 1 / -1; }
+  .hero-calendar-grid { height: 48px; }
+  .hero-booking--three { top: 26px; }
+  .hero-booking--two { left: 21%; }
+  .hero-solution--automation { display: flex; align-items: center; }
+  .hero-solution--automation .hero-solution-heading { border: 0; }
+  .hero-solution--automation .hero-workflow { flex: 1; padding: 10px 12px; }
+  .hero-solution--automation .hero-workflow > span { width: 26px; height: 26px; }
+  .hero-solutions-orbit { display: none; }
+}
+
+@media (max-width: 479px) {
+  .hero-solutions-stage { gap: 8px; }
+  .hero-solution-heading { gap: 6px; padding-inline: 10px; font-size: 11px; }
+  .hero-solution--crm .hero-solution-status { display: none; }
+  .hero-web-copy > strong { font-size: 20px; }
+  .hero-web-preview, .hero-web-toolbar { padding-inline: 14px; }
+  .hero-web-art { height: 120px; }
+  .hero-web-tile { height: 84px; }
+  .hero-crm-board { gap: 4px; padding: 10px 8px; }
+  .hero-crm-contact { grid-template-columns: 1fr; padding: 5px; }
+  .hero-crm-contact > .hero-ui-line { display: none; }
+  .hero-crm-progress { width: 90%; }
+  .hero-stock-list { padding: 10px; }
+  .hero-stock-row { gap: 6px; }
+}

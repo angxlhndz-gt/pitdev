@@ -2,7 +2,7 @@ import { ArrowDown, MessageCircle, Sparkles } from 'lucide-react';
 import { getWhatsAppUrl } from '../config/site.js';
 import AnimatedNetworkBackground from './AnimatedNetworkBackground.jsx';
 import ButtonLink from './ButtonLink.jsx';
-import PremiumLaptopShowcase from './PremiumLaptopShowcase.jsx';
+import HeroSolutionsShowcase from './HeroSolutionsShowcase.jsx';
 
 export default function Hero({ content }) {
   const whatsappUrl = getWhatsAppUrl();
@@ -63,7 +63,7 @@ export default function Hero({ content }) {
           </div>
         </div>
 
-        <PremiumLaptopShowcase content={content} />
+        <HeroSolutionsShowcase content={content} />
       </div>
     </section>
   );
