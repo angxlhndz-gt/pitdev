@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import ButtonLink from '../components/ButtonLink.jsx';
 import Contact from '../components/Contact.jsx';
+import CardVisual from '../components/CardVisual.jsx';
 import Hero from '../components/Hero.jsx';
 import SectionHeader from '../components/SectionHeader.jsx';
 import useScrollAnimations from '../hooks/useScrollAnimations.js';
@@ -53,16 +54,17 @@ function ServicesSummary({ content }) {
         </SectionHeader>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
-          {content.services.slice(0, 4).map(({ title, description, icon: Icon }) => (
+          {content.services.slice(0, 4).map(({ title, description, icon: Icon }, index) => (
             <article
               key={title}
               data-stagger-item
-              className="group rounded-lg border border-white/10 bg-white/[0.035] p-5 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.62] hover:bg-pit-neon/[0.055]"
+              className="group visual-card rounded-lg border border-white/10 bg-white/[0.035] p-5 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.62] hover:bg-pit-neon/[0.055]"
             >
-              <div className="mb-5 grid size-12 place-items-center rounded-lg border border-pit-neon/[0.28] bg-pit-neon/10 text-pit-neon transition duration-300 group-hover:shadow-glow">
-                <Icon className="size-6" aria-hidden="true" />
-              </div>
-              <h3 className="text-lg font-bold text-white">{title}</h3>
+              <CardVisual serviceIndex={index} alt={title} />
+              <h3 className="flex items-center gap-2.5 text-lg font-bold text-white">
+                <Icon className="size-5 shrink-0 text-pit-neon" aria-hidden="true" />
+                {title}
+              </h3>
               <p className="mt-3 text-sm leading-7 text-pit-ink/70">{description}</p>
             </article>
           ))}
@@ -95,11 +97,12 @@ function ProductsSummary({ content }) {
               <article
                 key={id}
                 data-stagger-item
-                className="rounded-lg border border-white/10 bg-white/[0.035] p-5 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.58] hover:bg-pit-neon/[0.055]"
+                className="group visual-card rounded-lg border border-white/10 bg-white/[0.035] p-5 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.58] hover:bg-pit-neon/[0.055]"
               >
-                <div className="mb-5 flex items-start justify-between gap-4">
-                  <div className="grid size-12 place-items-center rounded-lg border border-pit-neon/[0.28] bg-pit-neon/10 text-pit-neon">
-                    <Icon className="size-6" aria-hidden="true" />
+                <CardVisual productId={id} alt={name} />
+                <div className="mb-4 flex items-center justify-between gap-4">
+                  <div className="text-pit-neon">
+                    <Icon className="size-5" aria-hidden="true" />
                   </div>
                   <span className="rounded-lg border border-pit-neon/25 bg-pit-neon/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-pit-neon/85">
                     {meta.label}

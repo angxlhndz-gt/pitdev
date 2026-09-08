@@ -1,6 +1,7 @@
 import { CheckCircle2, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import SectionHeader from './SectionHeader.jsx';
+import CardVisual from './CardVisual.jsx';
 
 export default function Products({ content, variant = 'default', showHeader = true }) {
   const [activeProduct, setActiveProduct] = useState(null);
@@ -51,8 +52,8 @@ export default function Products({ content, variant = 'default', showHeader = tr
                 aria-controls={detailsId}
                 onClick={() => toggleProduct(id)}
                 onKeyDown={(event) => handleProductKeyDown(event, id)}
-                className={`group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-lg border bg-white/[0.035] shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.62] hover:bg-pit-neon/[0.055] hover:shadow-[0_24px_80px_rgba(57,255,136,0.12)] focus-ring ${
-                  isSpacious ? 'min-h-[320px] p-6 sm:p-7' : 'min-h-[360px] p-5'
+                className={`group visual-card relative flex h-full cursor-pointer flex-col overflow-hidden rounded-lg border bg-white/[0.035] shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.62] hover:bg-pit-neon/[0.055] hover:shadow-[0_24px_80px_rgba(57,255,136,0.12)] focus-ring ${
+                  isSpacious ? 'visual-card--spacious min-h-[320px] p-6 sm:p-7' : 'min-h-[360px] p-5'
                 } ${
                   isOpen ? 'border-pit-neon/70 bg-pit-neon/[0.06] shadow-glow' : 'border-white/10'
                 }`}
@@ -62,9 +63,10 @@ export default function Products({ content, variant = 'default', showHeader = tr
                   aria-hidden="true"
                 />
 
-                <div className="relative mb-5 flex items-start justify-between gap-4">
-                  <div className="grid size-12 place-items-center rounded-lg border border-pit-neon/[0.28] bg-pit-neon/10 text-pit-neon transition duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:shadow-glow">
-                    <Icon className="size-6 transition duration-300 group-hover:rotate-3" aria-hidden="true" />
+                <CardVisual productId={id} alt={name} spacious={isSpacious} />
+                <div className="relative mb-4 flex items-center justify-between gap-4">
+                  <div className="text-pit-neon">
+                    <Icon className="size-5" aria-hidden="true" />
                   </div>
                   <span className="rounded-lg border border-pit-neon/25 bg-pit-neon/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-pit-neon/85">
                     {meta.label}

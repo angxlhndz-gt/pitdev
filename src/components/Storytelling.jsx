@@ -1,4 +1,5 @@
 import { CheckCircle2 } from 'lucide-react';
+import ProcessVisual from './ProcessVisual.jsx';
 
 export default function Storytelling({ content }) {
   return (
@@ -32,23 +33,22 @@ export default function Storytelling({ content }) {
         </div>
 
         <div className="relative" data-stagger data-stagger-start="top 78%">
-          <div className="absolute bottom-8 left-6 top-8 hidden w-px bg-gradient-to-b from-pit-neon/80 via-pit-neon/25 to-transparent sm:block" />
+          <div className="story-connector" aria-hidden="true" />
           <div className="grid gap-5">
             {content.storytelling.steps.map(({ title, description, icon: Icon }, index) => (
               <article
                 key={title}
                 data-stagger-item
-                className="group relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] p-5 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/55 hover:bg-pit-neon/[0.055] sm:pl-20"
+                className="story-card group relative overflow-hidden rounded-lg border border-white/10 bg-[#0a140e] p-5 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/55 hover:bg-pit-neon/[0.055]"
               >
                 <div
                   className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(57,255,136,0.14),transparent_15rem)] opacity-0 transition duration-300 group-hover:opacity-100"
                   aria-hidden="true"
                 />
-                <div className="relative mb-5 grid size-12 place-items-center rounded-lg border border-pit-neon/30 bg-pit-black text-pit-neon shadow-glow sm:absolute sm:left-0 sm:top-1/2 sm:mb-0 sm:-translate-y-1/2">
-                  <Icon className="size-6 transition duration-300 group-hover:scale-110" aria-hidden="true" />
-                </div>
+                <ProcessVisual stage={index} className="story-card-art" />
                 <div className="relative">
                   <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-pit-neon/70">
+                    <Icon className="mr-2 inline size-4" aria-hidden="true" />
                     {content.storytelling.stepLabel} {String(index + 1).padStart(2, '0')}
                   </p>
                   <h3 className="mt-2 text-xl font-bold text-white">{title}</h3>

@@ -1,5 +1,7 @@
 import { CheckCircle2, MessageCircle } from 'lucide-react';
 import ButtonLink from '../components/ButtonLink.jsx';
+import CardVisual from '../components/CardVisual.jsx';
+import ProcessVisual from '../components/ProcessVisual.jsx';
 import PageHero from '../components/PageHero.jsx';
 import SectionHeader from '../components/SectionHeader.jsx';
 import Storytelling from '../components/Storytelling.jsx';
@@ -19,16 +21,17 @@ function ServiceDetails({ content }) {
             <article
               key={title}
               data-stagger-item
-              className="group relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] p-6 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.62] hover:bg-pit-neon/[0.055] sm:p-7"
+              className="group visual-card visual-card--spacious relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] p-6 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.62] hover:bg-pit-neon/[0.055] sm:p-7"
             >
               <div
                 className="absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(57,255,136,0.14),transparent_17rem)] opacity-0 transition duration-300 group-hover:opacity-100"
                 aria-hidden="true"
               />
-              <div className="relative mb-6 grid size-14 place-items-center rounded-lg border border-pit-neon/[0.28] bg-pit-neon/10 text-pit-neon transition duration-300 group-hover:shadow-glow">
-                <Icon className="size-7" aria-hidden="true" />
-              </div>
-              <h2 className="relative text-2xl font-bold text-white">{title}</h2>
+              <CardVisual serviceIndex={index} alt={title} spacious />
+              <h2 className="relative flex items-center gap-3 text-2xl font-bold text-white">
+                <Icon className="size-6 shrink-0 text-pit-neon" aria-hidden="true" />
+                {title}
+              </h2>
               <p className="relative mt-4 text-base leading-8 text-pit-ink/[0.76]">{description}</p>
               <p className="relative mt-4 text-sm leading-7 text-pit-ink/[0.68]">
                 {content.servicesPage.details[index]}
@@ -54,14 +57,15 @@ function WorkProcess({ content }) {
           {content.servicesPage.processDescription}
         </SectionHeader>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4" data-stagger>
+        <div className="work-process grid gap-4 md:grid-cols-2 lg:grid-cols-4" data-stagger>
           {content.servicesPage.processSteps.map((step, index) => (
             <article
               key={step.title}
               data-stagger-item
-              className="rounded-lg border border-white/10 bg-white/[0.035] p-5 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.55] hover:bg-pit-neon/[0.055]"
+              className="process-card group relative rounded-lg border border-white/10 bg-[#09150e] p-5 shadow-panel transition duration-300 hover:-translate-y-1 hover:border-pit-neon/[0.55] hover:bg-pit-neon/[0.055]"
             >
-              <div className="mb-5 flex size-12 items-center justify-center rounded-lg border border-pit-neon/25 bg-pit-neon/10 font-mono text-sm font-bold text-pit-neon">
+              <ProcessVisual stage={index} />
+              <div className="process-number mb-5 flex size-10 items-center justify-center rounded-full border border-pit-neon/30 bg-[#0a1b11] font-mono text-sm font-bold text-pit-neon">
                 {String(index + 1).padStart(2, '0')}
               </div>
               <h3 className="text-xl font-bold text-white">{step.title}</h3>
