@@ -17,12 +17,13 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '12kb' }));
 
 const databaseUrl = process.env.TURSO_DATABASE_URL || 'file:local.sqlite';
-const db = createClient({ url: databaseUrl, authToken: process.env.TURSO_AUTH_TOKEN || undefined });
-const storageConfigured = !process.env.VERCEL || (databaseUrl.startsWith('libsql://') && Boolean(process.env.TURSO_AUTH_TOKEN));
+const storageConfigured = !(process.env.VERCEL || process.env.VERCEL_ENV) || (databaseUrl.startsWith('libsql://') && Boolean(process.env.TURSO_AUTH_TOKEN));
+let db;
 let ready;
 
 function init() {
   if (!ready) {
+    db = createClient({ url: databaseUrl, authToken: process.env.TURSO_AUTH_TOKEN || undefined });
     ready = db.batch([
       `CREATE TABLE IF NOT EXISTS cards (
         id TEXT PRIMARY KEY, business_id TEXT NOT NULL, name TEXT NOT NULL,
