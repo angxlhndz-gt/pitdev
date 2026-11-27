@@ -5,8 +5,40 @@ import { ArrowRight, Check, ChevronLeft, CircleHelp, Gift, LockKeyhole, LogOut, 
 import './style.css';
 
 const storedCardKey = 'pitdev-loyalty-card-id';
+const demoCardPrefix = 'pitdev-club-demo-card:';
 const clubBase = '/club';
 const path = window.location.pathname.replace(/^\/club(?=\/|$)/, '') || '/';
+
+function readDemoCard(id) {
+  if (!/^[a-f0-9]{32}$/.test(id || '')) return null;
+  try {
+    const value = JSON.parse(window.localStorage.getItem(`${demoCardPrefix}${id}`));
+    return value?.id === id && Number.isInteger(value.stamps) && value.stamps >= 0 && value.stamps <= 6
+      ? { ...value, demo: true }
+      : null;
+  } catch { return null; }
+}
+
+function saveDemoCard(card) {
+  window.localStorage.setItem(`${demoCardPrefix}${card.id}`, JSON.stringify(card));
+  window.localStorage.setItem(storedCardKey, card.id);
+  return { ...card, demo: true };
+}
+
+function createDemoCard(name) {
+  const current = window.localStorage.getItem(storedCardKey);
+  if (readDemoCard(current)) return readDemoCard(current);
+  const date = new Date().toISOString();
+  return saveDemoCard({ id: crypto.randomUUID().replaceAll('-', ''), name: name.trim(), stamps: 1, rewards: 0, createdAt: date, updatedAt: date });
+}
+
+function changeDemoCard(id, action) {
+  const card = readDemoCard(id);
+  if (!card) throw new Error('Esta tarjeta de prueba solo existe en el teléfono donde se creó.');
+  if (action === 'stamp' && card.stamps >= 6) throw new Error('La tarjeta ya completó sus seis sellos.');
+  if (action === 'redeem' && card.stamps !== 6) throw new Error('Aún faltan sellos para canjear.');
+  return saveDemoCard({ ...card, stamps: action === 'stamp' ? card.stamps + 1 : 0, rewards: action === 'redeem' ? card.rewards + 1 : card.rewards, updatedAt: new Date().toISOString() });
+}
 
 async function request(url, options = {}) {
   const response = await fetch(`/api/index?route=${encodeURIComponent(url)}`, {
@@ -24,6 +56,8 @@ function useCard(id) {
   const [error, setError] = React.useState('');
   const refresh = React.useCallback(async () => {
     if (!id) return;
+    const demo = readDemoCard(id);
+    if (demo) { setCard(demo); setError(''); return; }
     try { setCard((await request(`/card/${id}`)).card); setError(''); }
     catch (e) { setError(e.message); }
   }, [id]);
@@ -75,11 +109,13 @@ function Welcome() {
   const [form, setForm] = React.useState({ name: '', phone: '' });
   const [error, setError] = React.useState('');
   const [busy, setBusy] = React.useState(false);
-  React.useEffect(() => { request('/health').then(() => setAvailable(true)).catch(() => setAvailable(false)); }, []);
+  React.useEffect(() => { request('/health').then((data) => setAvailable(data.ok === true)).catch(() => setAvailable(false)); }, []);
   async function enroll(event) {
     event.preventDefault(); setBusy(true); setError('');
     try {
-      const { card } = await request('/enroll', { method: 'POST', body: JSON.stringify(form) });
+      const card = available === false
+        ? createDemoCard(form.name)
+        : (await request('/enroll', { method: 'POST', body: JSON.stringify(form) })).card;
       window.localStorage.setItem(storedCardKey, card.id);
       window.location.assign(`${clubBase}/card/${card.id}`);
     } catch (e) { setError(e.message); setBusy(false); }
@@ -99,11 +135,31 @@ function Welcome() {
         </div>
       </section>
       <section className="steps" aria-labelledby="steps-heading"><div className="wrap"><div className="section-heading"><span className="eyebrow">ASÍ DE FÁCIL</span><h2 id="steps-heading">Tu rutina, con recompensa.</h2></div><div className="step-grid">
-        <article><span className="step-icon"><Ticket size={23} /></span><b>01</b><h3>Registrate</h3><p>Dejá tu nombre y teléfono. Tu tarjeta nace con el primer sello.</p></article>
-        <article><span className="step-icon"><QrCode size={23} /></span><b>02</b><h3>Mostrá tu código</h3><p>En cada visita, el negocio escanea tu código personal y suma un sello.</p></article>
-        <article><span className="step-icon"><Gift size={23} /></span><b>03</b><h3>Canjeá tu premio</h3><p>Al completar los seis sellos, tu recompensa está lista para usar.</p></article>
+        <article><span className="step-icon"><Ticket size={23} /></span><b>01</b><h3>Registrate</h3><p>{available === false ? 'Usá un nombre de prueba. Tu tarjeta nace con el primer sello en este teléfono.' : 'Dejá tu nombre y teléfono. Tu tarjeta nace con el primer sello.'}</p></article>
+        <article><span className="step-icon"><QrCode size={23} /></span><b>02</b><h3>Mostrá tu código</h3><p>{available === false ? 'Probá el QR y simulá las siguientes visitas desde tu tarjeta.' : 'En cada visita, el negocio escanea tu código personal y suma un sello.'}</p></article>
+        <article><span className="step-icon"><Gift size={23} /></span><b>03</b><h3>Canjeá tu premio</h3><p>{available === false ? 'Al llegar a seis sellos, podés simular el canje.' : 'Al completar los seis sellos, tu recompensa está lista para usar.'}</p></article>
       </div></div></section>
-      <section className="join-section wrap" id="unirme"><div className="join-intro"><span className="eyebrow">EMPEZÁ HOY</span><h2>Tu primera visita<br /><i>ya suma.</i></h2><p>Creá tu tarjeta en menos de un minuto. La vas a poder consultar desde este teléfono.</p><div className="join-stat"><span>01</span><span>SELLO DE BIENVENIDA<br />INCLUIDO</span></div></div><form className="join-form" onSubmit={enroll} aria-labelledby="form-heading" action="/api/index" method="post"><div className="form-top"><Sparkles size={24} /><h3 id="form-heading">Crear mi tarjeta</h3><p>Solo necesitamos estos datos para identificarla.</p></div>{available === false && <p className="form-error" role="status">Vista previa disponible. El registro se habilitará al conectar la base compartida.</p>}<label htmlFor="name">Nombre y apellido <span aria-hidden="true">*</span></label><input id="name" name="name" autoComplete="name" required minLength={2} maxLength={80} disabled={available === false} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ej. Andrea López" /><label htmlFor="phone">Teléfono <span aria-hidden="true">*</span></label><input id="phone" name="phone" type="tel" autoComplete="tel" inputMode="tel" required minLength={8} maxLength={20} disabled={available === false} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="Ej. 5555 1234" /><p className="form-help">Usaremos tu número para identificar tu tarjeta. Esta demo no envía promociones.</p>{error && <p className="form-error" role="alert">{error}</p>}<button className="button button-accent full" disabled={busy || available !== true}>{busy ? 'Creando tarjeta…' : <>Crear mi tarjeta <ArrowRight size={18} /></>}</button></form></section>
+      <section className="join-section wrap" id="unirme">
+        <div className="join-intro">
+          <span className="eyebrow">EMPEZÁ HOY</span>
+          <h2>Tu primera visita<br /><i>ya suma.</i></h2>
+          <p>Creá tu tarjeta en menos de un minuto. La vas a poder consultar desde este teléfono.</p>
+          <div className="join-stat"><span>01</span><span>SELLO DE BIENVENIDA<br />INCLUIDO</span></div>
+        </div>
+        <form className="join-form" onSubmit={enroll} aria-labelledby="form-heading" action="/api/index?route=%2Fenroll" method="post">
+          <div className="form-top"><Sparkles size={24} /><h3 id="form-heading">Crear mi tarjeta</h3><p>Solo necesitamos estos datos para identificarla.</p></div>
+          {available === false && <p className="demo-banner" role="status">Modo demostración: tu nombre y tus sellos se guardarán solo en este teléfono. No se compartirán con el negocio.</p>}
+          <label htmlFor="name">{available === false ? 'Nombre de prueba' : 'Nombre y apellido'} <span aria-hidden="true">*</span></label>
+          <input id="name" name="name" autoComplete={available === false ? 'off' : 'name'} required minLength={2} maxLength={80} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder={available === false ? 'Ej. Cliente demo' : 'Ej. Andrea López'} />
+          {available !== false && <>
+            <label htmlFor="phone">Teléfono <span aria-hidden="true">*</span></label>
+            <input id="phone" name="phone" type="tel" autoComplete="tel" inputMode="tel" required minLength={8} maxLength={20} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="Ej. 5555 1234" />
+          </>}
+          <p className="form-help">{available === false ? 'Usá un nombre inventado. No hace falta ingresar tu teléfono.' : 'Usaremos tu número para identificar tu tarjeta. Esta demo no envía promociones.'}</p>
+          {error && <p className="form-error" role="alert">{error}</p>}
+          <button className="button button-accent full" disabled={busy || available === null}>{busy ? 'Creando tarjeta…' : <>Crear mi tarjeta <ArrowRight size={18} /></>}</button>
+        </form>
+      </section>
     </main>
   </Shell>;
 }
@@ -112,7 +168,36 @@ function CardPage({ id }) {
   const { card, error, refresh } = useCard(id);
   React.useEffect(() => { if (card) window.localStorage.setItem(storedCardKey, id); }, [card, id]);
   const scanUrl = `${window.location.origin}${clubBase}/scan/${id}`;
-  return <Shell><main className="card-page wrap"><a className="back-link" href={clubBase}><ChevronLeft size={17} /> Volver al inicio</a><div className="card-page-grid"><div><span className="eyebrow">TU TARJETA FRECUENTE</span><h1>Hola, <span>{card?.name?.split(' ')[0] || 'bienvenido'}.</span></h1><p className="page-lead">Cada visita te acerca un poco más a tu recompensa.</p>{card && <><LoyaltyCard card={card} /><div className="progress-copy"><span>{card.stamps === 6 ? '¡Tu recompensa está lista!' : `${6 - card.stamps} sellos para tu recompensa`}</span><button type="button" onClick={refresh}>Actualizar tarjeta</button></div></>}</div><aside className="qr-panel"><span className="eyebrow">TU CÓDIGO PERSONAL</span><h2>Mostralo al visitar el negocio.</h2><p>El personal escanea este código para sumar tu próximo sello. Podés abrir esta página cuando quieras.</p>{card && <div className="qr-frame"><QRCodeSVG value={scanUrl} size={208} marginSize={1} bgColor="#ffffff" fgColor="#12212a" /><span>Tarjeta #{id.slice(0, 8).toUpperCase()}</span></div>}<div className="panel-tip"><CircleHelp size={20} /><span>Tu saldo se guarda en el sistema, no dentro del código QR.</span></div></aside></div>{error && <p className="form-error" role="alert">{error}</p>}<div className="wallet-note"><Stamp size={21} /><div><b>Vista web de la tarjeta</b><p>La integración para agregarla a Apple Wallet se habilitará cuando definamos un proveedor que permita crear tarjetas personalizadas sin costo fijo.</p></div></div></main></Shell>;
+  return <Shell><main className="card-page wrap">
+    <a className="back-link" href={clubBase}><ChevronLeft size={17} /> Volver al inicio</a>
+    <div className="card-page-grid">
+      <div>
+        <span className="eyebrow">TU TARJETA FRECUENTE</span>
+        <h1>Hola, <span>{card?.name?.split(' ')[0] || 'bienvenido'}.</span></h1>
+        <p className="page-lead">Cada visita te acerca un poco más a tu recompensa.</p>
+        {card && <>
+          <LoyaltyCard card={card} />
+          <div className="progress-copy"><span>{card.stamps === 6 ? '¡Tu recompensa está lista!' : `${6 - card.stamps} sellos para tu recompensa`}</span><button type="button" onClick={refresh}>Actualizar tarjeta</button></div>
+          {card.demo && <div className="demo-controls">
+            <b>Probá cómo funcionan los sellos</b>
+            <p>Esta es una simulación en tu teléfono. Para sumar sellos desde otro celular necesitaremos la base compartida.</p>
+            <button type="button" className="button button-dark" onClick={() => { changeDemoCard(id, card.stamps === 6 ? 'redeem' : 'stamp'); refresh(); }}>
+              {card.stamps === 6 ? <><Gift size={18} /> Simular canje</> : <><Stamp size={18} /> Simular siguiente visita</>}
+            </button>
+          </div>}
+        </>}
+      </div>
+      <aside className="qr-panel">
+        <span className="eyebrow">TU CÓDIGO PERSONAL</span>
+        <h2>{card?.demo ? 'Así se verá tu QR.' : 'Mostralo al visitar el negocio.'}</h2>
+        <p>{card?.demo ? 'En esta prueba, el QR solo encuentra tu tarjeta en este teléfono. Aún no funciona entre teléfonos distintos.' : 'El personal escanea este código para sumar tu próximo sello. Podés abrir esta página cuando quieras.'}</p>
+        {card && <div className="qr-frame"><QRCodeSVG value={scanUrl} size={208} marginSize={1} bgColor="#ffffff" fgColor="#12212a" /><span>Tarjeta #{id.slice(0, 8).toUpperCase()}</span></div>}
+        <div className="panel-tip"><CircleHelp size={20} /><span>Tu saldo se guarda en {card?.demo ? 'este teléfono' : 'el sistema'}, no dentro del código QR.</span></div>
+      </aside>
+    </div>
+    {error && <p className="form-error" role="alert">{error}</p>}
+    <div className="wallet-note"><Stamp size={21} /><div><b>Vista web de la tarjeta</b><p>La integración para agregarla a Apple Wallet se habilitará cuando definamos un proveedor que permita crear tarjetas personalizadas sin costo fijo.</p></div></div>
+  </main></Shell>;
 }
 
 function parseCardId(value) {
@@ -120,8 +205,32 @@ function parseCardId(value) {
   return match?.[1]?.toLowerCase() || '';
 }
 
+function DemoStaffPage({ initialId }) {
+  const id = initialId || window.localStorage.getItem(storedCardKey);
+  const { card, refresh } = useCard(id);
+  const [notice, setNotice] = React.useState('');
+  function simulate(action) {
+    try { changeDemoCard(id, action); refresh(); setNotice(action === 'stamp' ? 'Sello de prueba agregado.' : 'Canje de prueba completado.'); }
+    catch (error) { setNotice(error.message); }
+  }
+  return <Shell><main className="staff-page wrap">
+    <div className="staff-heading"><div><span className="eyebrow">MODO DEMOSTRACIÓN</span><h1>Simular una visita.</h1><p>Este panel usa únicamente la tarjeta guardada en este teléfono.</p></div></div>
+    {card?.demo ? <section className="staff-card demo-staff-card">
+      <span className="eyebrow">TARJETA DE PRUEBA</span><h2>{card.name}</h2>
+      <StampGrid count={card.stamps} />
+      <div className="result-progress"><strong>{card.stamps} de 6</strong><span>sellos acumulados</span></div>
+      <button type="button" className="button button-accent full" onClick={() => simulate(card.stamps === 6 ? 'redeem' : 'stamp')}>
+        {card.stamps === 6 ? <><Gift size={18} /> Simular canje</> : <><Stamp size={18} /> Sumar sello de prueba</>}
+      </button>
+      {notice && <p role="status" className="demo-status">{notice}</p>}
+      <p className="fine-print">Para que un negocio escanee la tarjeta desde otro dispositivo necesitamos conectar una base compartida.</p>
+    </section> : <section className="staff-card demo-staff-card"><h2>Esta tarjeta no está en este teléfono.</h2><p>Las tarjetas de prueba solo se guardan en el dispositivo donde se crean.</p><a href={clubBase} className="button button-dark">Crear tarjeta de prueba <ArrowRight size={18} /></a></section>}
+  </main></Shell>;
+}
+
 function StaffPage({ initialId = '' }) {
   const [logged, setLogged] = React.useState(false);
+  const [demoOnly, setDemoOnly] = React.useState(false);
   const [pin, setPin] = React.useState('');
   const [lookup, setLookup] = React.useState(initialId);
   const [selected, setSelected] = React.useState(null);
@@ -132,6 +241,7 @@ function StaffPage({ initialId = '' }) {
   const [scanning, setScanning] = React.useState(false);
   const scanner = React.useRef(null);
 
+  React.useEffect(() => { request('/health').then((data) => setDemoOnly(data.ok !== true)).catch(() => setDemoOnly(true)); }, []);
   React.useEffect(() => { request('/staff/me').then(() => setLogged(true)).catch(() => {}); }, []);
   React.useEffect(() => { if (logged) request('/staff/cards').then((data) => setCards(data.cards)).catch(() => {}); }, [logged]);
   React.useEffect(() => { if (logged && initialId) loadCard(initialId); }, [logged, initialId]);
@@ -173,6 +283,8 @@ function StaffPage({ initialId = '' }) {
   }
   async function stopScan() { await scanner.current?.stop().catch(() => {}); setScanning(false); }
   async function logout() { await request('/staff/logout', { method: 'POST' }); setLogged(false); setSelected(null); }
+
+  if (demoOnly) return <DemoStaffPage initialId={initialId} />;
 
   return <Shell><main className="staff-page wrap"><div className="staff-heading"><div><span className="eyebrow">PANEL DEL NEGOCIO</span><h1>Registrar visitas.</h1><p>Escaneá una tarjeta y sumá un sello. Cada movimiento queda guardado.</p></div>{logged && <button type="button" className="text-button" onClick={logout}><LogOut size={17} /> Cerrar sesión</button>}</div>
     {!logged ? <form className="staff-login" onSubmit={login} aria-labelledby="login-heading" action="/api/staff/login" method="post"><div className="staff-login-icon"><LockKeyhole size={25} /></div><h2 id="login-heading">Acceso para el personal</h2><p>Ingresá la clave del negocio para gestionar las tarjetas.</p><label htmlFor="staff-pin">Clave de acceso</label><input id="staff-pin" name="pin" type="password" autoComplete="current-password" required minLength={8} value={pin} onChange={(e) => setPin(e.target.value)} /><button className="button button-dark full" disabled={busy}>{busy ? 'Entrando…' : 'Entrar al panel'}</button>{error && <p className="form-error" role="alert">{error}</p>}</form> : <div className="staff-grid"><section className="staff-card"><div className="section-icon"><ScanLine size={24} /></div><h2>Buscar una tarjeta</h2><p>Usá la cámara del teléfono o ingresá el código que muestra el cliente.</p><div id="qr-reader" className={scanning ? 'scanner-active' : 'scanner-idle'} />{scanning ? <button type="button" className="button button-outline full" onClick={stopScan}>Cerrar cámara</button> : <button type="button" className="button button-dark full" onClick={startScan}><ScanLine size={18} /> Escanear QR</button>}<div className="divider"><span>O INGRESAR CÓDIGO</span></div><form onSubmit={(event) => { event.preventDefault(); loadCard(lookup); }}><label htmlFor="card-code">Código o enlace de la tarjeta</label><div className="inline-form"><input id="card-code" name="card-code" value={lookup} onChange={(e) => setLookup(e.target.value)} placeholder="Pegá el enlace aquí" /><button type="submit" className="button button-accent">Buscar</button></div></form></section>

@@ -2,7 +2,9 @@
 
 El club vive en `/club` dentro del mismo sitio de PitDev. La carpeta contiene la interfaz independiente; el API compartido está en `../api/index.js`.
 
-El flujo de prueba incluye registro con primer sello, QR personal, panel de personal con clave, sellos hasta seis y canje. La tarjeta es una **vista web**: aún no se emite un archivo Apple Wallet, ya que el servicio gratuito anterior no tiene una API de personalización confirmada.
+El flujo de prueba incluye registro con primer sello, QR personal, panel de personal con clave, sellos hasta seis y canje. Si la base compartida aún no está configurada, la página habilita una **simulación local**: el visitante crea una tarjeta con un nombre de prueba y suma sellos o canjea desde el mismo teléfono. Esa tarjeta no aparece en otros dispositivos; el teléfono no se solicita ni se guarda en este modo.
+
+La tarjeta es una **vista web**: aún no se emite un archivo Apple Wallet, ya que el servicio gratuito anterior no tiene una API de personalización confirmada.
 
 ## Compilar y comprobar
 
