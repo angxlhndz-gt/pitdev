@@ -8,3 +8,52 @@
 .wallet-demo-note p{max-width:650px;line-height:1.6}
 .wallet-demo-link{margin-top:17px;min-height:46px}
 .wallet-demo-actions{display:flex;flex-wrap:wrap;gap:10px}
+
+/* PitDev Club shares the black and neon-green identity of the main site. */
+:root{--pit-night:#030604;--pit-deep:#09140d;--pit-green:#39ff88;--pit-muted:#62826b;--pit-paper:#f5f9f5}
+.dark{background:var(--pit-night)}
+.app-shell.light{background:var(--pit-paper)}
+.dark .site-header,.dark footer{border-color:#244d31}
+.brand>span:nth-child(2)>span,.dark .brand>span:nth-child(2)>span,.hero h1 span,.join-intro i,.card-page h1 span{color:var(--pit-green)}
+.brand small,.eyebrow,.dark .eyebrow,.join-stat,.hero-note svg{color:var(--pit-green)}
+.brand-mark span,.brand-mark span:nth-child(2),.brand-mark span:nth-child(3){border-color:var(--pit-green)}
+.dark .header-link:hover,.header-link:hover{color:#15884b}
+.dark .header-link:hover{color:var(--pit-green)}
+.button-accent{background:var(--pit-green);color:var(--pit-night)}
+.button-accent:hover{background:#80ffad}
+.button-dark{background:#0d4827;color:#fff}
+.button-dark:hover{background:#166a3b}
+.button-outline{border-color:#bdd6c4;color:#164d2c}
+.button-outline:hover{border-color:#39b66d;background:#f0fbf3}
+.hero-visual{height:520px;border-color:#2c5a39;background:radial-gradient(circle at 50% 48%,#173321 0%,#07150c 55%,#030604 100%)}
+.hero-visual:before{border-color:#267746}
+.hero-content>p{color:#c7d8ca}
+.hero-note{color:#b8d7c0}
+.visual-caption,.visual-index{color:#b8e9c7}
+.visual-card{transform:rotate(-3deg)}
+.loyalty-card{aspect-ratio:1.2;background:var(--pit-night);color:#fff;border:1px solid #2b7e47;padding:26px 30px;box-shadow:0 18px 45px #03140855}
+.loyalty-card:before{background:radial-gradient(circle at 80% 13%,#17442a55,transparent 43%),linear-gradient(145deg,#07120a,#030604 64%,#0b1f12)}
+.loyalty-card:after{background:repeating-linear-gradient(110deg,#39ff88 0 1px,transparent 1px 11px);opacity:.035}
+.card-brand b,.card-eyebrow,.card-series{color:var(--pit-green)}
+.card-copy strong em{color:#effff2}
+.card-bottom{border-top-color:#377b4c;color:#e4f5e8}
+.card-orbit{border-color:#39ff881e}
+.stamp-grid,.stamp-grid.compact{grid-template-columns:repeat(3,minmax(0,1fr));justify-items:center;gap:12px 18px}
+.stamp-slot,.stamp-grid.compact .stamp-slot,.card-page .stamp-slot,.result-card>.stamp-grid .stamp-slot,.demo-staff-card>.stamp-grid .stamp-slot{width:min(100%,74px);max-width:74px;aspect-ratio:1;border:2px solid #567a60;border-radius:50%;background:var(--pit-deep);color:var(--pit-muted);box-shadow:inset 0 0 0 5px #09140d}
+.stamp-slot.filled{background:var(--pit-green);border-color:var(--pit-green);box-shadow:0 0 20px #39ff8840,inset 0 0 0 5px #030604}
+.stamp-grid .stamp-slot.filled,.stamp-grid.compact .stamp-slot.filled{background:var(--pit-green);border-color:var(--pit-green);box-shadow:0 0 20px #39ff8840,inset 0 0 0 5px #030604}
+.stamp-slot img{display:block;width:60%;height:60%;object-fit:contain;opacity:.48}
+.stamp-slot.filled img{filter:brightness(0);opacity:1}
+.steps{background:#f0f7f0}
+.step-icon,.staff-login-icon,.section-icon,.empty-state>span{background:#e1f7e9;color:#0b6c36}
+.step-grid article>b{color:#68a77c}
+.join-form{border:1px solid #cfe7d5}
+.form-top svg,.wallet-note svg,.wallet-demo-note>svg{color:#17994f}
+.join-form label span{color:#bd3b39}
+.qr-panel,.staff-card,.staff-login{border-color:#d4e5d8}
+.panel-tip,.wallet-demo-note,.count-pill{background:#eaf8ed;border-color:#cce8d4;color:#285e38}
+.wallet-note b{color:#163622}
+.progress-copy button,.text-button{color:#127a3d}
+.hero-visual .loyalty-card{max-width:430px}
+@media(max-width:680px){.hero-visual{height:420px}.loyalty-card{padding:23px}.stamp-grid,.stamp-grid.compact{gap:9px 13px}.stamp-slot,.stamp-grid.compact .stamp-slot,.card-page .stamp-slot{width:min(100%,65px)}}
+@media(max-width:420px){.hero-visual{height:365px}.loyalty-card{padding:17px}.stamp-slot,.stamp-grid.compact .stamp-slot,.card-page .stamp-slot{width:min(100%,51px)}.stamp-grid,.stamp-grid.compact{gap:6px 10px}.card-copy strong{font-size:22px}}

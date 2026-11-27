@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { QRCodeSVG } from 'qrcode.react';
-import { ArrowRight, Check, ChevronLeft, CircleHelp, Gift, LockKeyhole, LogOut, QrCode, ScanLine, ShieldCheck, Sparkles, Stamp, Ticket, WalletCards, X } from 'lucide-react';
+import { ArrowRight, ChevronLeft, CircleHelp, Gift, LockKeyhole, LogOut, QrCode, ScanLine, ShieldCheck, Sparkles, Stamp, Ticket, WalletCards, X } from 'lucide-react';
 import './style.css';
 
 const storedCardKey = 'pitdev-loyalty-card-id';
@@ -87,7 +87,7 @@ function Shell({ children, theme = 'light' }) {
 function StampGrid({ count, compact = false }) {
   return <div className={`stamp-grid ${compact ? 'compact' : ''}`} aria-label={`${count} de 6 sellos acumulados`}>
     {Array.from({ length: 6 }, (_, index) => <div key={index} className={`stamp-slot ${index < count ? 'filled' : ''}`} aria-label={index < count ? `Sello ${index + 1} obtenido` : `Sello ${index + 1} pendiente`}>
-      {index < count ? <Check aria-hidden="true" size={compact ? 19 : 25} strokeWidth={2.6} /> : <span>{String(index + 1).padStart(2, '0')}</span>}
+      <img src="/club/stamp-mark.png" alt="" aria-hidden="true" />
     </div>)}
   </div>;
 }

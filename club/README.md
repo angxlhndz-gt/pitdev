@@ -6,6 +6,8 @@ El flujo de prueba incluye registro con primer sello, QR personal, panel de pers
 
 Los botones de Apple Wallet entregan **dos pases reales de muestra** (`/pitdev-club-demo.pkpass` y `/pitdev-club-demo-2.pkpass`). Comparten `passTypeIdentifier` y `serialNumber`; el segundo muestra 2 de 6 sellos y reemplaza al primero al agregarlo en Wallet. El QR de ambos abre el Club. No contienen el nombre ni el QR personal del visitante; los sellos de la simulación web no generan automáticamente un pase nuevo. Wallet Creator firmó la tarjeta de presentación anterior, pero su archivo no se puede modificar sin volver a firmarlo. Estos pases se emitieron con dos llamadas gratuitas a un servicio externo. Para generar un pase por cliente y sello se necesita un proveedor con API y capacidad suficiente o un certificado propio.
 
+El arte del Club se genera con `python3 club/scripts/build_wallet_art.py`: seis estados de sellos con el emblema PitDev, en formato horizontal y en formato póster. La vista web utiliza el mismo emblema. Para reemitir los dos pases firmados de muestra con el diseño nuevo, usar `python3 club/scripts/issue_demo_passes.py --contact-email <correo-del-emisor>`; el script conserva la identidad de los pases anteriores y **solo sustituye ambos archivos si ambos se emiten y validan**. El servicio gratuito permite dos emisiones diarias y reinicia el cupo a las 00:00 UTC. En iOS 27 se muestra el arte póster; en versiones anteriores se usa la tarjeta clásica. Según la documentación de Apple, iOS 26 no muestra la imagen horizontal de las tarjetas de tienda, de modo que ahí puede verse el número de sellos sin los seis emblemas.
+
 ## Compilar y comprobar
 
 Desde la raíz del sitio:
