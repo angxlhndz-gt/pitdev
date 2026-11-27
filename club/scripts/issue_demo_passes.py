@@ -19,6 +19,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[2]
 PASS_1 = ROOT / "public" / "pitdev-club-demo.pkpass"
 PASS_2 = ROOT / "public" / "pitdev-club-demo-2.pkpass"
+PREVIOUS_PASS = ROOT / "club" / "wallet-archive" / "pitdev-club-demo.pkpass"
 ART = ROOT / "club" / "wallet-art"
 MARK = ROOT / "club" / "public" / "stamp-mark.png"
 ISSUER = "https://walletmcppass.com/api/passes"
@@ -30,7 +31,7 @@ def encode(path):
 
 
 def existing_identity():
-    with zipfile.ZipFile(PASS_1) as archive:
+    with zipfile.ZipFile(PREVIOUS_PASS) as archive:
         data = json.loads(archive.read("pass.json"))
     return data["passTypeIdentifier"], data["serialNumber"]
 
