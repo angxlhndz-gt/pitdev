@@ -200,7 +200,7 @@ function CardPage({ id }) {
       <WalletCards size={23} aria-hidden="true" />
       <div>
         <b>Probá el reemplazo en Apple Wallet</b>
-        <p>Agregá la tarjeta de muestra con 1 sello. Después abrí la versión de 2 sellos: usa el mismo identificador y reemplaza la primera en Wallet. Esta prueba todavía no lleva tu nombre ni tu QR personal; los sellos de la web no generan por sí solos un nuevo pase.</p>
+        <p>La vista web ya tiene el nuevo diseño de seis sellos. Los pases de Wallet todavía conservan el diseño anterior: agregá el de 1 sello y después el de 2 para probar cómo se reemplaza. No llevan tu nombre ni tu QR personal, y los sellos de la web aún no generan un pase nuevo.</p>
         <div className="wallet-demo-actions">
           <a className="button button-dark wallet-demo-link" href="/pitdev-club-demo.pkpass">Agregar 1 sello <ArrowRight size={17} aria-hidden="true" /></a>
           <a className="button button-outline wallet-demo-link" href="/pitdev-club-demo-2.pkpass">Reemplazar con 2 sellos <ArrowRight size={17} aria-hidden="true" /></a>
