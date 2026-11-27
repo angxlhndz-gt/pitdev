@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { QRCodeSVG } from 'qrcode.react';
-import { ArrowRight, Check, ChevronLeft, CircleHelp, Gift, LockKeyhole, LogOut, QrCode, ScanLine, ShieldCheck, Sparkles, Stamp, Ticket, X } from 'lucide-react';
+import { ArrowRight, Check, ChevronLeft, CircleHelp, Gift, LockKeyhole, LogOut, QrCode, ScanLine, ShieldCheck, Sparkles, Stamp, Ticket, WalletCards, X } from 'lucide-react';
 import './style.css';
 
 const storedCardKey = 'pitdev-loyalty-card-id';
@@ -196,7 +196,17 @@ function CardPage({ id }) {
       </aside>
     </div>
     {error && <p className="form-error" role="alert">{error}</p>}
-    <div className="wallet-note"><Stamp size={21} /><div><b>Vista web de la tarjeta</b><p>La integración para agregarla a Apple Wallet se habilitará cuando definamos un proveedor que permita crear tarjetas personalizadas sin costo fijo.</p></div></div>
+    <div className="wallet-note wallet-demo-note">
+      <WalletCards size={23} aria-hidden="true" />
+      <div>
+        <b>Probá el reemplazo en Apple Wallet</b>
+        <p>Agregá la tarjeta de muestra con 1 sello. Después abrí la versión de 2 sellos: usa el mismo identificador y reemplaza la primera en Wallet. Esta prueba todavía no lleva tu nombre ni tu QR personal; los sellos de la web no generan por sí solos un nuevo pase.</p>
+        <div className="wallet-demo-actions">
+          <a className="button button-dark wallet-demo-link" href="/pitdev-club-demo.pkpass">Agregar 1 sello <ArrowRight size={17} aria-hidden="true" /></a>
+          <a className="button button-outline wallet-demo-link" href="/pitdev-club-demo-2.pkpass">Reemplazar con 2 sellos <ArrowRight size={17} aria-hidden="true" /></a>
+        </div>
+      </div>
+    </div>
   </main></Shell>;
 }
 

@@ -4,7 +4,7 @@ El club vive en `/club` dentro del mismo sitio de PitDev. La carpeta contiene la
 
 El flujo de prueba incluye registro con primer sello, QR personal, panel de personal con clave, sellos hasta seis y canje. Si la base compartida aún no está configurada, la página habilita una **simulación local**: el visitante crea una tarjeta con un nombre de prueba y suma sellos o canjea desde el mismo teléfono. Esa tarjeta no aparece en otros dispositivos; el teléfono no se solicita ni se guarda en este modo.
 
-La tarjeta es una **vista web**: aún no se emite un archivo Apple Wallet, ya que el servicio gratuito anterior no tiene una API de personalización confirmada.
+Los botones de Apple Wallet entregan **dos pases reales de muestra** (`/pitdev-club-demo.pkpass` y `/pitdev-club-demo-2.pkpass`). Comparten `passTypeIdentifier` y `serialNumber`; el segundo muestra 2 de 6 sellos y reemplaza al primero al agregarlo en Wallet. El QR de ambos abre el Club. No contienen el nombre ni el QR personal del visitante; los sellos de la simulación web no generan automáticamente un pase nuevo. Wallet Creator firmó la tarjeta de presentación anterior, pero su archivo no se puede modificar sin volver a firmarlo. Estos pases se emitieron con dos llamadas gratuitas a un servicio externo. Para generar un pase por cliente y sello se necesita un proveedor con API y capacidad suficiente o un certificado propio.
 
 ## Compilar y comprobar
 

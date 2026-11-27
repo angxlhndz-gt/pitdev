@@ -62,6 +62,32 @@
           "value": "inline; filename=\"pitdev-wallet.pkpass\""
         }
       ]
+    },
+    {
+      "source": "/pitdev-club-demo.pkpass",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/vnd.apple.pkpass"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"pitdev-club-demo.pkpass\""
+        }
+      ]
+    },
+    {
+      "source": "/pitdev-club-demo-2.pkpass",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/vnd.apple.pkpass"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"pitdev-club-demo-2.pkpass\""
+        }
+      ]
     }
   ]
 }
