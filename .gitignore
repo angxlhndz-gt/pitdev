@@ -1,5 +1,8 @@
 node_modules
 dist
+public/club
+*.sqlite
+*.sqlite-*
 .env
 .env.local
 .DS_Store

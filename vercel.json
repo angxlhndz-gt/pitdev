@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/club",
+      "destination": "/club/index.html"
+    },
+    {
+      "source": "/club/:path*",
+      "destination": "/club/index.html"
+    },
+    {
       "source": "/card",
       "destination": "/index.html"
     },
